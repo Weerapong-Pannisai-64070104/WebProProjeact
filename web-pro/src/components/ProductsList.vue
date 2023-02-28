@@ -1,17 +1,4 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
+
 <template>
     <div class="bg-white">
         <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -24,7 +11,7 @@
                         <img :src="product.imageSrc" :alt="product.imageAlt"
                             class="h-full w-full object-cover object-center group-hover:opacity-75" />
                     </div>
-                    <h3 class="mt-4 text-sm text-gray-700">{{ product.name }}</h3>
+                    <h3 class=" mx-4 text-gray-700 text-xl ">{{ product.name }}</h3>
                     <p class="mt-1 text-lg font-medium text-gray-900">
                         {{ product.price }}
 
@@ -37,18 +24,16 @@
         </div>
     </div>
 </template>
-  
 <script setup>
 const products = [
     {
         id: 1,
-        name: "Earthen Bottle",
+        name: "มุมมองนักอ่านพระเจ้า เล่ม 7",
         href: "/Product",
-        price: "$48",
         imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
+            "https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png",
         imageAlt:
-            "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+            "omniscient reader's viewpoint",
     },
     {
         id: 2,

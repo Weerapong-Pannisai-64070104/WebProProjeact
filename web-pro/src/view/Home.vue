@@ -3,7 +3,8 @@
     <NavBar />
     <Carousel_Bar/>
     <ProductsList />
-  </template>
+    
+</template>
   
   <script>
   import Carousel_Bar from '../components/CarouselBar'
