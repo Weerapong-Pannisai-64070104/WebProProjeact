@@ -39,7 +39,7 @@ const products = [
     {
         id: 2,
         name: "Nomad Tumbler",
-        href: "#",
+        href: "/Product",
         price: "$35",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
@@ -49,7 +49,7 @@ const products = [
     {
         id: 3,
         name: "Focus Paper Refill",
-        href: "#",
+        href: "/Product",
         price: "$89",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
@@ -59,7 +59,7 @@ const products = [
     {
         id: 4,
         name: "Machined Mechanical Pencil",
-        href: "#",
+        href: "/Product",
         price: "$35",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
@@ -69,7 +69,7 @@ const products = [
     {
         id: 1,
         name: "Earthen Bottle",
-        href: "#",
+        href: "/Product",
         price: "$48",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
@@ -79,7 +79,7 @@ const products = [
     {
         id: 2,
         name: "Nomad Tumbler",
-        href: "#",
+        href: "/Product",
         price: "$35",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
@@ -89,7 +89,7 @@ const products = [
     {
         id: 3,
         name: "Focus Paper Refill",
-        href: "#",
+        href: "/Product",
         price: "$89",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
@@ -99,7 +99,7 @@ const products = [
     {
         id: 4,
         name: "Machined Mechanical Pencil",
-        href: "#",
+        href: "/Product",
         price: "$35",
         imageSrc:
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",

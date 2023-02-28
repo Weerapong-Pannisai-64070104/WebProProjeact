@@ -7,18 +7,18 @@
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner" style="max-height: 500px">
-    <div class="carousel-item active" >
+    <div class="carousel-item active" data-bs-interval="5000">
         <img src="https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png" class="d-block w-100 p-5 "  alt="...">
   
     </div>
-    <div class="carousel-item" >
+    <div class="carousel-item" data-bs-interval="5000">
       <img src="https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png" class="d-block w-100 p-5  " alt="...">
     
     </div>
-    <div class="carousel-item" >
+    <div class="carousel-item" data-bs-interval="5000">
       <img src="https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png" class="d-block w-100 p-5 " alt="...">
     </div>
-    <div class="carousel-item" >
+    <div class="carousel-item" data-bs-interval="5000">
       <img src="https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png" class="d-block w-100 p-5 " alt="...">
     </div>
   </div>
