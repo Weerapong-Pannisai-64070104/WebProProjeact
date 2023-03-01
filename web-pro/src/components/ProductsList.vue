@@ -34,7 +34,10 @@
                                             <input type="radio" id="three" value="Religion" v-model="picked" />
                                             <label for="three" >Religion</label>
                                         </div>
-                                        
+                                         <div class="Math btn btn-link">
+                                            <input type="radio" id="four" value="Math" v-model="picked" />
+                                            <label for="four" >Math</label>
+                                        </div>
                                     </div>
                                 </div>
                         </div>
@@ -86,10 +89,6 @@ export default {
             }
             
         },
-        // Pickgerne(){
-        //     return this.book.filter(x=>(x.gerne).includes(this.picked))
-        // }
-
      },methods: {
       toggle () {
         this.active = !this.active
