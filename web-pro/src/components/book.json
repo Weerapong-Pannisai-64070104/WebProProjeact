@@ -6,28 +6,32 @@
         "imageSrc":
         "    https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png",
         "imageAlt":
-        "omniscient reader's viewpoint"
+        "omniscient reader's viewpoint",
+        "gerne":"Novel"
         
     },
     {
         "id" :2,
-        "name": "Nomad Tumbler",
-        "href": "#",
-        "price": "$35",
+        "name": "อัศวินอุตุกับปีศาจทั้งแปด",
+        "href": "/Product",
+        
         "imageSrc":
-            "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
+            "https://cdn.discordapp.com/attachments/959359393776959553/1080512012758569070/9786169258223L.png",
         "imageAlt":
-            "Olive drab green insulated bottle with flared screw l and flat top."
+            "อัศวินอุตุกับปีศาจทั้งแปด",
+            "gerne":"Philosophy"
+            
     },
     {
         "id" :3,
-        "name": "Focus Paper Refill",
-        "href": "#",
-        "price": "$89",
+        "name": "สมองเศรษฐี",
+        "href": "/Product",
+        
         "imageSrc":
-            "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
+            "https://cdn.discordapp.com/attachments/959359393776959553/1080512436710408233/9786161808976L.png",
         "imageAlt":
-            "Person using a pen to cross a task off a productivity paper card."
+            "Person using a pen to cross a task off a productivity paper card.",
+            "gerne":"Philosophy" 
     },
     {
         "id" :4,
@@ -40,7 +44,7 @@
             "Hand holding black machined steel mechanical pencil with brass tip and top."
     },
     {
-        "id" :1,
+        "id" :5,
         "name": "Earthen Bottle",
         "href": "#",
         "price": "$48",
@@ -50,7 +54,7 @@
             "Tall slender porcelain bottle with natural clay textured body and cork stopper."
     },
     {
-        "id":2,
+        "id":6,
         "name": "Nomad Tumbler",
         "href": "#",
         "price": "$35",
@@ -60,7 +64,7 @@
             "Olive drab green insulated bottle with flared screw  and flat top."
     },
     {
-        "id": 3,
+        "id": 7,
         "name": "Focus Paper Refill",
         "href": "#",
         "price": "$89",
@@ -70,10 +74,10 @@
             "Person using a pen to cross a task off a productivity paper card."
     },
     {
-        "id": 4,
+        "id": 8,
         "name": "Machined Mechanical Pencil",
         "href": "#",
-        "price": "$35",
+        
         "imageSrc":
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
         "imageAlt":
