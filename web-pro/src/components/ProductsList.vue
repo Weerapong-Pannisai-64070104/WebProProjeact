@@ -3,8 +3,8 @@
     <div class="bg-white">
         <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 class="sr-only">Products</h2>
-            <form>   
-              <div class="relative p-8 mb-5 ">
+            <form class="">   
+              <div class="relative p-8 mb-auto mt-5 ">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 mb-13.5 pointer-events-none">
                       <svg aria-hidden="true" class="w-100 h-5 pr-2 text-gray-800 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                   </div>
@@ -14,9 +14,9 @@
             </form >
                   
                 <div class="d">
-                    <button @click="toggle" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Toggle</button>
+                    <button @click="toggle" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Genres</button>
                         <div v-if="active"> 
-                                <div class="card ">
+                                <div class="card mt-2">
                                     <div class="card-content px-2 grid grid-cols-5">
                                         <div class="All btn btn-link">
                                             <button @click='unCheck' >All</button>
@@ -83,7 +83,7 @@ export default {
             if(this.look != ''){
                 return this.book.filter(x=>((x.name).includes(this.look)))
             }if(this.picked !=''){
-                return this.book.filter(x=>(x.gerne == this.picked ))
+                return this.book.filter(x=>(x.genre == this.picked ))
             }else{
                 return this.book
             }

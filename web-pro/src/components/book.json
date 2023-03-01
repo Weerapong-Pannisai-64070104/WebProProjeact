@@ -7,7 +7,7 @@
         "    https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png",
         "imageAlt":
         "omniscient reader's viewpoint",
-        "gerne":"Novel"
+        "genre":"Novel"
         
     },
     {
@@ -19,7 +19,7 @@
             "https://cdn.discordapp.com/attachments/959359393776959553/1080512012758569070/9786169258223L.png",
         "imageAlt":
             "อัศวินอุตุกับปีศาจทั้งแปด",
-            "gerne":"Philosophy"
+            "genre":"Philosophy"
             
     },
     {
@@ -31,7 +31,7 @@
             "https://cdn.discordapp.com/attachments/959359393776959553/1080512436710408233/9786161808976L.png",
         "imageAlt":
             "Person using a pen to cross a task off a productivity paper card.",
-            "gerne":"Philosophy" 
+            "genre":"Philosophy" 
     },
     {
         "id" :4,
