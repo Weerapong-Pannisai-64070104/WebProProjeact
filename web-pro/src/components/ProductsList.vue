@@ -87,7 +87,8 @@ export default {
                 return this.book
             }
             
-        },
+        }
+
      },methods: {
       toggle () {
         this.active = !this.active
@@ -97,8 +98,10 @@ export default {
         },
         addToCart(products){
             this.cart.push(products)
+            localStorage.setItem("cart", JSON.stringify(this.cart))
         }
-    }
+    },created() {
+             this.cart = JSON.parse(localStorage.cart)}
     
 }
 
