@@ -17,27 +17,17 @@
                     <button @click="toggle" class="btn btn-dark">Genres</button>
                         <div v-if="active"> 
                                 <div class="card mt-2">
-                                    <div class="card-content px-2 grid grid-cols-5">
-                                        <div class="All btn btn-link">
+                                    <div class="card-content px-2 py-2 grid grid-cols-5">
+                                        <div class="All">
                                             <button @click='unCheck' >All</button>
                                         </div>
-                                        <div class="Novel btn btn-link">
-                                            <input type="radio" id="one" value="Novel" v-model="picked" />
-                                            <label for="one" >Novel</label>
-                                           
+                                        <div class="" v-for="item in genre" :key = "item.id" >
+                                            <div class="Novel ">
+                                                <input type="radio" id="one" name="type" :value = item.name v-model="picked" />
+                                                <label >{{item.name}}</label>
+                                            </div>
                                         </div>
-                                        <div class="Philosophy btn btn-link">
-                                            <input type="radio" id="two" value="Philosophy" v-model="picked" />
-                                            <label for="two"  >Philosophy</label>
-                                        </div>
-                                        <div class="Religion btn btn-link">
-                                            <input type="radio" id="three" value="Religion" v-model="picked" />
-                                            <label for="three" >Religion</label>
-                                        </div>
-                                         <div class="Math btn btn-link">
-                                            <input type="radio" id="four" value="Math" v-model="picked" />
-                                            <label for="four" >Math</label>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                         </div>
@@ -61,9 +51,19 @@
         
     </div>
 </template>
-
+<script setup>
+    const genre = [
+        { name: "Action", href: "#", current: false },
+        { name: "Mystery", href: "#", current: false },
+        { name: "Philosophy", href: "#", current: false },
+        { name: "Fantasy", href: "#", current: false },
+        { name: "History", href: "#", current: false },
+        { name: "Drama", href: "#", current: false },
+    ];
+</script>
 <script>
 import booklist from "./book.json"
+
 export default {
     name: 'ProductList',
     components:{
@@ -75,20 +75,24 @@ export default {
             look:'',
             active: false,
             picked:'',
-            cart:[]
+            cart:[],
         }
     },computed: {
         NewS(){
-            if(this.look != ''){
-                return this.book.filter(x=>((x.name).includes(this.look)))
-            }if(this.picked !=''){
-                return this.book.filter(x=>(x.genre == this.picked ))
+            let type = this.book
+            if(this.look !== ''){
+                return type.filter(x=>((x.name).includes(this.look)))
+            }if (this.picked != ''){
+                // console.log(type.filter(x=>x.genre.includes(this.picked)  )) 
+                return type.filter(x=>x.genre.includes(this.picked))
             }else{
-                return this.book
+                (type.forEach(element => {
+                    console.log(element)
+                }))
+                return type
             }
             
-        }
-
+        },
      },methods: {
       toggle () {
         this.active = !this.active
@@ -98,10 +102,8 @@ export default {
         },
         addToCart(products){
             this.cart.push(products)
-            localStorage.setItem("cart", JSON.stringify(this.cart))
         }
-    },created() {
-             this.cart = JSON.parse(localStorage.cart)}
+    }
     
 }
 

@@ -7,7 +7,7 @@
         "    https://cdn.discordapp.com/attachments/959359393776959553/1080179282082537513/9786161850883L.png",
         "imageAlt":
         "omniscient reader's viewpoint",
-        "genre":"Novel"
+        "genre":"Action Fantasy Mystery"
         
     },
     {
@@ -51,7 +51,9 @@
         "imageSrc":
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
         "imageAlt":
-            "Tall slender porcelain bottle with natural clay textured body and cork stopper."
+            "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
+            "genre":"Novel"
+            
     },
     {
         "id":6,
@@ -60,7 +62,8 @@
         "imageSrc":
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
         "imageAlt":
-            "Olive drab green insulated bottle with flared screw  and flat top."
+            "Olive drab green insulated bottle with flared screw  and flat top.",
+            "genre":"Novel"
     },
     {
         "id": 7,
@@ -69,7 +72,8 @@
         "imageSrc":
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
         "imageAlt":
-            "Person using a pen to cross a task off a productivity paper card."
+            "Person using a pen to cross a task off a productivity paper card.",
+            "genre":"Novel"
     },
     {
         "id": 8,
@@ -78,7 +82,8 @@
         "imageSrc":
             "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
         "imageAlt":
-            "Hand holding black machined steel mechanical pencil with brass tip and top."
+            "Hand holding black machined steel mechanical pencil with brass tip and top.",
+            "genre":"Novel"
     }
     
 ]
