@@ -1,7 +1,7 @@
 <template>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <NavBar />
-    <CheckOutBar/>
+    <div><NavBar :cart = "cart" />
+    <CheckOutBar :cart = "cart"/></div>
 </template>
 
 <script>
@@ -13,8 +13,20 @@ export default {
     name: 'CheckOutPage',
     components: {
         NavBar,
-        CheckOutBar
-    }
+        CheckOutBar,
+
+    },
+    data() {
+    return{
+        cart:[]
+    }},
+    created() {
+        if (localStorage.cart == undefined) {
+            this.cart = [];
+        } else {
+            this.cart = JSON.parse(localStorage.cart);
+        }
+    },
 }
 </script>
 

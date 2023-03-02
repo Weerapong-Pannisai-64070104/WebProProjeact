@@ -1,6 +1,6 @@
 <template>
   <div class="d">
-    <NavBar :cart = "cart" />
+    <NavBar :cart = "cart" :clearCart = "clearCart" />
     <CarouselBar />
     <ProductsList :add= "addToCart" />
   </div>
@@ -27,6 +27,11 @@ export default {
     addToCart(products) {
       this.cart.push(products)
       localStorage.setItem("cart", JSON.stringify(this.cart));
+    },
+    clearCart() {
+      this.cart = []
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+
     },
   },created() {
     if (localStorage.cart == undefined) {
