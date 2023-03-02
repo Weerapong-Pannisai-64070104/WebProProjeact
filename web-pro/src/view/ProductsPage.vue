@@ -1,7 +1,10 @@
 <template>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <NavBar />
-    <ProductOver/>
+    <div class="d">
+        <NavBar />
+         <ProductOver/>
+    </div>
+    
     
 </template>
 
