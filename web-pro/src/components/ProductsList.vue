@@ -107,13 +107,7 @@ import booklist from "./book.json";
 export default {
   name: "ProductList",
   components: {},
-  created() {
-    if (localStorage.cart == undefined) {
-      this.cart = [];
-    } else {
-      this.cart = JSON.parse(localStorage.cart);
-    }
-  },
+  
     props: {
     add: { type: Function },
   },
@@ -151,8 +145,7 @@ export default {
       this.picked = "";
     },
     addToCart(products) {
-        this.cart.push(products)
-      localStorage.setItem("cart", JSON.stringify(this.cart));
+       this.add(products)
     },
   },
 };

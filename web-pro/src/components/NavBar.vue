@@ -78,19 +78,7 @@
                           </div>
                           <div class="relative mt-6 flex-1 px-4 sm:px-6">
                             <!-- Your content -->
-                            <div
-                              class="card"
-                              v-for="item in cart"
-                              :key="item.id"
-                            >
-                              <div class="card-content">
-                                <div
-                                  class="media-left object-scale-down h-48 w-96"
-                                >
-                                  <img :src="item.imageSrc" alt="" />
-                                </div>
-                              </div>
-                            </div>
+                            
                           </div>
                         </div>
                       </DialogPanel>
@@ -241,30 +229,24 @@ const Open = ref(false);
 </script>
 <script>
 export default {
-  prop: {},
+  props: {
+    cart: Array 
+  },
   name: "ProductList",
   components: {},
   data() {
     return {
       active: false,
-      cart: [],
     };
   },
   methods: {
     toggle() {
       this.active = !this.active;
     },
-  },
-  created() {
-    if (localStorage.cart == undefined) {
-      this.cart = [];
-    } else {
-      this.cart = JSON.parse(localStorage.getItem("cart"));
-    }
-  },
+  }
 };
 </script>
 
 <style>
-    
+
 </style>
