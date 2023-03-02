@@ -1,16 +1,13 @@
 <template>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <NavBar />
-    
-    <div class="">
-      <Carousel_Bar/>
-    </div>
+      <CarouselBar/>
     <ProductsList />
     
 </template>
   
   <script>
-  import Carousel_Bar from '../components/CarouselBar'
+  import CarouselBar from '../components/CarouselBar'
   import NavBar from '../components/NavBar.vue'
   import ProductsList from '../components/ProductsList.vue'
   // import booklist from "../components/book.json"
@@ -19,7 +16,7 @@
     name: 'App',
     components: {
       NavBar,
-      Carousel_Bar,
+      CarouselBar,
       ProductsList,
     },
     data(){

@@ -14,7 +14,7 @@
             </form >
                   
                 <div class="d">
-                    <button @click="toggle" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Genres</button>
+                    <button @click="toggle" class="btn btn-dark">Genres</button>
                         <div v-if="active"> 
                                 <div class="card mt-2">
                                     <div class="card-content px-2 grid grid-cols-5">
@@ -43,24 +43,22 @@
                         </div>
                 </div>  
             <div class="mt-2 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-10">
-                <router-link v-for="(product, index) in NewS"  :key="index" :to="product.href" class="group">
-                    <div
-                        class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-xl bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                        <img :src="product.imageSrc" :alt="product.imageAlt"
-                            class="h-full w-full object-cover object-center group-hover:opacity-80" />
-                    </div>
-                    <h3 class=" mx-4 text-gray-700 text-xl ">{{ product.name }}</h3>
-                    <p class="mt-1 text-lg font-medium text-gray-900">
-                        {{ product.price }}
-                        
-                    </p>
-                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                <a v-for="(product, index) in NewS"  :key="index"  class="group">
+                    <router-link :to="product.href">
+                        <div
+                            class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-xl bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                            <img :src="product.imageSrc" :alt="product.imageAlt"
+                                class="h-full w-full object-cover object-center group-hover:opacity-80" />
+                        </div>
+                    </router-link>
+                    <h3 class=" mx-4      text-gray-700 text-l text-center ">{{ product.name }}</h3>
+                    <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full z-50" @click="addToCart(product)">
                         Borrow
                     </button>
-                </router-link>
+                </a>  
             </div>
         </div>
-        {{picked}}
+        
     </div>
 </template>
 
@@ -76,7 +74,8 @@ export default {
             book : booklist,
             look:'',
             active: false,
-            picked:''
+            picked:'',
+            cart:[]
         }
     },computed: {
         NewS(){
@@ -92,9 +91,13 @@ export default {
      },methods: {
       toggle () {
         this.active = !this.active
-      }, unCheck() {
+      }, 
+      unCheck() {
                     this.picked = ''
-                }
+        },
+        addToCart(products){
+            this.cart.push(products)
+        }
     }
     
 }
