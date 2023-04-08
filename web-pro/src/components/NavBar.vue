@@ -173,6 +173,7 @@ const navigation = [{ name: "Home", href: "/", current: false }];
 const Open = ref(false);
 </script>
 <script>
+
 export default {
   props: {
     cart: Array,

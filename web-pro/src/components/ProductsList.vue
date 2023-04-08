@@ -102,6 +102,7 @@ const genre = [
 ];
 </script>
 <script>
+
 import booklist from "./book.json";
 
 export default {
