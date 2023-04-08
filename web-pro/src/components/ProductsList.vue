@@ -93,12 +93,12 @@
 </template>
 <script setup>
 const genre = [
-  { name: "Action", href: "#", current: false },
-  { name: "Mystery", href: "#", current: false },
-  { name: "Philosophy", href: "#", current: false },
-  { name: "Fantasy", href: "#", current: false },
-  { name: "History", href: "#", current: false },
-  { name: "Drama", href: "#", current: false },
+  { name: "Action", href: "#", current: false ,value:"Action"},
+  { name: "Mystery", href: "#", current: false ,value:"Mystery"},
+  { name: "Philosophy", href: "#", current: false ,value:"Philosophy"},
+  { name: "Fantasy", href: "#", current: false ,value:"Fantasy"},
+  { name: "History", href: "#", current: false ,value:"History"},
+  { name: "Drama", href: "#", current: false,value:"Drama" },
 ];
 </script>
 <script>
