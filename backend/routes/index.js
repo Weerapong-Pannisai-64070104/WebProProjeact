@@ -5,18 +5,8 @@ router = express.Router();
 
 router.get("/", async function (req, res, next) {
   try {
-
-    let query = `SELECT a.*, b.file_path FROM blogs AS a LEFT JOIN 
-    (SELECT * FROM images WHERE main=1) AS b ON a.id = b.blog_id`
-    let params = []
-    if (req.query.search){
-      query = query + ` WHERE a.title LIKE ?`
-      params = [`%${req.query.search}%`]
-    }
-    const [rows, fields] = await pool.query(query, params);
-    return res.json( { 
-      search: req.query.search || '', 
-      blogs: rows 
+    const query = await pool.query("SELECT * FROM Books join Book_type using (isbn) join Type using(Type_id);")
+      res.json( { book:query[0]
     });
   } catch (err) {
     return next(err)

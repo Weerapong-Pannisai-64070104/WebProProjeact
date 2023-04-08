@@ -49,10 +49,11 @@
               <div class="" v-for="item in genre" :key="item.id">
                 <div class="Novel">
                   <input
+                  
                     type="radio"
                     id="one"
                     name="type"
-                    :value="item.name"
+                    :value="item.value"
                     v-model="picked"
                   />
                   <label>{{ item.name }}</label>
@@ -65,8 +66,8 @@
       <div
         class="mt-2 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-10"
       >
-        <a v-for="(product, index) in NewS" :key="index" class="group">
-          <router-link :to="product.href">
+        <a v-for="product in NewS" :key="product.isbn" class="group">
+          <!-- <router-link :to="product.href"> -->
             <div
               class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-xl bg-gray-200 xl:aspect-w-7 xl:aspect-h-8"
             >
@@ -76,9 +77,9 @@
                 class="h-full w-full object-cover object-center group-hover:opacity-80"
               />
             </div>
-          </router-link>
+          <!-- </router-link> -->
           <h3 class="mx-4 text-gray-700 text-l text-center">
-            {{ product.name }}
+            {{ product.book_name }}
           </h3>
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full z-50"
@@ -93,17 +94,14 @@
 </template>
 <script setup>
 const genre = [
-  { name: "Action", href: "#", current: false ,value:"Action"},
-  { name: "Mystery", href: "#", current: false ,value:"Mystery"},
-  { name: "Philosophy", href: "#", current: false ,value:"Philosophy"},
-  { name: "Fantasy", href: "#", current: false ,value:"Fantasy"},
-  { name: "History", href: "#", current: false ,value:"History"},
-  { name: "Drama", href: "#", current: false,value:"Drama" },
+  { name: "Children", href: "#", current: false ,value:"Children"},
+  { name: "Non-Fiction", href: "#", current: false ,value:"Non-Fiction"},
+  { name: "Fiction", href: "#", current: false ,value:"Fiction"},
 ];
 </script>
 <script>
+import axios from "axios";
 
-import booklist from "./book.json";
 
 export default {
   name: "ProductList",
@@ -114,29 +112,13 @@ export default {
   },
   data() {
     return {
-      book: booklist,
+      book: null,
       look: "",
       active: false,
       picked: "",
       cart: [],
+      
     };
-  },
-  computed: {
-    NewS() {
-      let type = this.book;
-      if (this.look !== "") {
-        return type.filter((x) => x.name.includes(this.look));
-      }
-      if (this.picked != "") {
-        // console.log(type.filter(x=>x.genre.includes(this.picked)  ))
-        return type.filter((x) => x.genre.includes(this.picked));
-      } else {
-        type.forEach((element) => {
-          console.log(element);
-        });
-        return type;
-      }
-    },
   },
   methods: {
     toggle() {
@@ -147,6 +129,31 @@ export default {
     },
     addToCart(products) {
        this.add(products)
+    },
+  },created() {
+    axios
+      .get("http://localhost:3000/" )
+      .then((response) => {
+        this.book = response.data.book;
+        console.log(this.book);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },computed: {
+    NewS() {
+      let booklits = this.book
+       
+      if (this.look != "") {
+        return booklits.filter((x) => (x.book_name.toLowerCase()).includes((this.look).toLowerCase()));
+      }
+      if (this.picked != "") {
+        // console.log(type.filter(x=>x.genre.includes(this.picked)  ))
+        return booklits.filter((x) => x.book_type.includes(this.picked));
+      } else {
+        
+        return booklits;
+      }
     },
   },
 };
