@@ -123,6 +123,7 @@
 </template>
   
 <script setup>
+
 import { StarIcon } from '@heroicons/vue/20/solid'
 
 const product = {
