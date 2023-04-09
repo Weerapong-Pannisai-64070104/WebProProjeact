@@ -73,7 +73,6 @@
             >
               <img
                 :src="product.book_img"
-                :alt="product.imageAlt"
                 class="h-full w-full object-cover object-center group-hover:opacity-80"
               />
             </div>
