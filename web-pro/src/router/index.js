@@ -9,7 +9,7 @@ import CheckOutPage from '@/view/CheckOutPage.vue';
 
 const routes = [
     {
-        path: '/Home',
+        path: '/',
         name: 'Home',
         component:  Home
         
@@ -28,7 +28,7 @@ const routes = [
         
     },
     {
-        path: '/',
+        path: '/SignIn',
         name: 'SignIn',
         component: SignInPage,
         

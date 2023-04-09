@@ -14,11 +14,11 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 const indexRouter = require('./routes/index')
 const blogRouter = require('./routes/blog')
 const commentRouter = require('./routes/comment')
-
+const log = require('./routes/log')
 app.use(indexRouter.router)
 app.use(blogRouter.router)
 app.use(commentRouter.router)
-
+app.use(log.router)
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)
 })

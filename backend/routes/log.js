@@ -8,7 +8,24 @@ router = express.Router();
 const multer = require('multer')
 
 // Get comment
-router.get('/:blogId/comments', function(req, res, next){
+router.post('/SignIn',async function(req, res, next){
+    
+  const email = req.body.email;
+  console.log(email)
+  const password = req.body.password;
+  console.log(password)
+  try{
+    let results = await pool.query(
+        "SELECT * from Customer where email = ? and password = ?;",
+        [email, password]
+        );
+        
+    console.log(results[0])
+    
+  } catch (err) {
+    return next(err);
+  }
+
 });
 
 // Create new comment
