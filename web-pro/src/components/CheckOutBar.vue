@@ -5,20 +5,19 @@
                 <tr>
                     <th> </th>
                     <th class="px-4 py-2 text-left">Title</th>
-                    <th class="px-4 py-2 text-left">Quantity</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in cart" :key="item.id">
+                <tr v-for="item in cart" :key="item.isbn">
                     <td class="px-4 py-2">
-                        <img class="object-contain h-48 w-96" :src=item.imageSrc alt="Placeholder image">
+                        <img class="object-contain h-48 w-96" :src=item.img alt="Placeholder image">
                     </td>
-                    <td class="px-4 py-2">{{ item.name }}</td>
-                    <td class="px-4 py-2">{{ item.quantity }}</td>
+                    <td class="px-4 py-2">{{ item.book_name }}</td>
                 </tr>
             </tbody>
         </table>
-        <form class="mt-8 flex flex-col space-y-4 place-content-center">
+        <div class="flex flex-col justify-center items-center">
+            <form class="mt-8 flex flex-col space-y-4 place-content-center">
             <label class="block font-bold mb-2" for="borrow-time">Select Borrow Time:</label>
             <input v-model="timeinput" class="w-6/12 bg-white rounded-lg border border-gray-400 p-2" type="datetime-local"
                 id="borrow-time" placeholder="" name="borrow-time">
@@ -31,6 +30,8 @@
                 type="submit">Submit</button>
 
         </form>
+        </div>
+
     </div>
 </template>
 

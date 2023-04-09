@@ -30,7 +30,7 @@
                           <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0"
                             enter-to="opacity-full" leave="ease-in-out duration-500" leave-from="opacity-full"
                             leave-to="opacity-0">
-                            <div class="bg-white rounded-lg h-100 shadow overflow-scroll ">
+                            <div class="bg-white rounded-lg h-100 shadow overflow-scroll">
                               <table class="w-full">
                                 <thead class="border-b">
                                   <tr>
@@ -40,32 +40,28 @@
                                       </span>
                                     </th>
                                     <th class="px-4 py-2 text-left">Title</th>
-                                    <th class="px-4 py-2 text-left">
-                                      Quantity
-                                    </th>
+
+
                                   </tr>
                                 </thead>
 
                                 <tbody>
-                                  <tr v-for="item in cart" :key="item.id">
+                                  <tr v-for="item in cart" :key="item.isbn">
                                     <td class="px-4 py-2">
-                                      <img class="object-contain h-48 w-96" :src="item.imageSrc"
+                                      <img class="object-contain h-20 w-30" :src="item.book_img"
                                         alt="Placeholder image" />
                                     </td>
-                                    <td class="px-4 py-2">{{ item.name }}</td>
-                                    <td class="px-4 py-2">
-                                      {{ item.quantity }}
-                                    </td>
+                                    <td class="px-4 py-2">{{item.book_name}}</td>
+
                                   </tr>
                                 </tbody>
                               </table>
 
                               <div
-                                class="bottom-0 inset-x-0  absolute m-1 bg-gray-500 hover:bg-black text-white font-bold py-2 px-4 rounded-full text-center"
+                                class="bottom-0 inset-x-0 absolute m-1 bg-gray-500 hover:bg-black text-white font-bold py-2 px-4 rounded-full text-center"
                                 @click="goCheckout()">
                                 CheckOut
                               </div>
-
                             </div>
                           </TransitionChild>
                         </DialogPanel>
@@ -136,12 +132,12 @@
 
       <DisclosurePanel class="sm:hidden">
         <div class="space-y-1 px-2 pt-2 pb-3">
-          <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[
+          <DisclosureButton v-for="item in navigation" :key="item.book_name" as="a" :href="item.href" :class="[
             item.current
               ? 'bg-gray-900 text-white'
               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
             'block rounded-md px-3 py-2 text-base font-medium',
-          ]" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+          ]" :aria-current="item.current ? 'page' : undefined">{{ item.book_name }}</DisclosureButton>
         </div>
       </DisclosurePanel>
     </Disclosure>
@@ -173,7 +169,6 @@ const navigation = [{ name: "Home", href: "/", current: false }];
 const Open = ref(false);
 </script>
 <script>
-
 export default {
   props: {
     cart: Array,

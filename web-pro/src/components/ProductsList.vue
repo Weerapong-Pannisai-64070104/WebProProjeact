@@ -129,6 +129,7 @@ export default {
     },
     addToCart(products) {
        this.add(products)
+       console.log(this.cart)
     },
   },created() {
     axios
