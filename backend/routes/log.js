@@ -5,25 +5,35 @@ const pool = require("../config");
 
 router = express.Router();  
 
-const multer = require('multer')
+const multer = require('multer');
+const { error } = require("console");
 
-// Get comment
+// Login
 router.post('/SignIn',async function(req, res, next){
-    
+  const conn = await pool.getConnection()
+  // Begin transaction
+  await conn.beginTransaction();  
   const email = req.body.email;
-  console.log(email)
   const password = req.body.password;
-  console.log(password)
+  console.log(req.body)
   try{
-    let results = await pool.query(
+    let results = await conn.query(
         "SELECT * from Customer where email = ? and password = ?;",
         [email, password]
         );
-        
-    console.log(results[0])
-    
+        let results2 = await conn.query(
+          "SELECT * from Admin where admin_email = ? and admin_password = ?;",
+          [email, password]
+          );
+          if(results[0].length != 0){
+            res.json(results[0])
+          }else if(results2[0].length != 0){
+            res.json(results2[0])
+          }else{
+            throw new Error(error)
+          }
   } catch (err) {
-    return next(err);
+    res.status(401).json("Invalid Email or Password")
   }
 
 });

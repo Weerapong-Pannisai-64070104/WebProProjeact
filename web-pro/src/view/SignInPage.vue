@@ -3,15 +3,15 @@
     <div class="w-full min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
       <div class="w-full sm:max-w-md p-5 mx-auto">
         <h2 class="mb-12 text-center text-5xl font-extrabold">Welcome.</h2>
-    <form>
+    
           <div class="mb-4">
             <label class="block mb-1" for="email">Email-Address</label>
-            <input v-model="email" id="email" type="text" name="email"
+            <input v-model="e" id="email" type="text" name="email"
               class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
           </div>
           <div class="mb-4">
             <label class="block mb-1" for="password">Password</label>
-            <input v-model="password" id="password" type="password" name="password"
+            <input v-model="pass" id="password" type="password" name="password"
               class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
           </div>
           
@@ -23,21 +23,41 @@
           <div class="mt-6 text-center">
             <router-link to="/SignUp" class="underline">Sign up for an account</router-link>
           </div>
-    </form>
+  
       </div>
     </div>
   </template>
   
   <script>
+import axios from 'axios';
 
   export default {
     data() {
       return{
-         email:"",
-      password : "",
+         e:"",
+      pass: "",
       }
     }, methods: {
-  
+      submit() {
+      var formData = new FormData();
+      formData.append("email", this.e);
+      formData.append("password", this.pass);
+      axios
+        .post("http://localhost:3000/SignIn", formData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          this.$router.push({ path: "/" }); // Success! -> redirect to home page
+          console.log(response)
+        })
+        .catch((error) => {
+          alert(error.response.data)
+          this.e = ""
+          this.pass = ""
+        });
+    },
       
     },
   }
