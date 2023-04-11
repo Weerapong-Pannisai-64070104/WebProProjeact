@@ -51,6 +51,7 @@ import axios from 'axios';
         .then((response) => {
           this.$router.push({ path: "/" }); // Success! -> redirect to home page
           console.log(response)
+          
         })
         .catch((error) => {
           alert(error.response.data)

@@ -133,7 +133,7 @@
                   
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                  <a v-show="$store.state.email" @click="logout()" :class="[
+                  <a v-show="$store.state.email" @click="logout()"  :class="[
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   ]">Sign Out</a>
@@ -156,6 +156,7 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
+    
   </div>
 </template>
 
@@ -206,9 +207,11 @@ export default {
     goCheckout() {
       localStorage.setItem("cart", JSON.stringify(this.cart));
       window.location.href = "/CheckOut";
-    }, 
+    },
     logout(){
+      
       this.$store.commit('logout')
+    
     }
   },
   computed: {
@@ -218,6 +221,7 @@ export default {
   },
 
 };
+
 </script>
 
 <style></style>
