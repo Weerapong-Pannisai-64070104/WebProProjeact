@@ -64,24 +64,19 @@ export default {
             if (!this.fname) {
                 errors.push("Please enter your first name.");
             }
-
             if (!this.lname) {
                 errors.push("Please enter your last name.");
             }
-
             if (!this.email) {
                 errors.push("Please enter your email.");
             } else if (!/.+@.+\..+/.test(this.email)) {
                 errors.push("Please enter a valid email address.");
             }
-
             if (!this.pnum) {
                 errors.push("Please enter your phone number.");
             } else if (!/^[0-9]+$/.test(this.pnum)) {
                 errors.push("Please enter a valid phone number.");
             }
-            
-
             if (!this.password) {
                 errors.push("Please enter your password.");
             } else if (this.password.length < 6) {
@@ -90,11 +85,9 @@ export default {
             if (this.password !== this.conpassword) {
                 errors.push("Your passwords do not match.");
             }
-
             if (!this.address) {
                 errors.push("Please enter your address.");
             }
-            
             return errors;
         },
         submit() {
