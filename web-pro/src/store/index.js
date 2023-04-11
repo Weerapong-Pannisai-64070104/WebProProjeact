@@ -10,11 +10,11 @@ export default  createStore({
         login(state,email){
             state.email = email;
             localStorage.setItem('email',email);
-            alert('logged in');
+            
         },logout(state){
             state.email="";
-            localStorage.removeItem('eamil');
-            alert('logged out');
+            localStorage.removeItem("email");
+            
         },
         initializeStore(state){
             if(localStorage.getItem('email')){
