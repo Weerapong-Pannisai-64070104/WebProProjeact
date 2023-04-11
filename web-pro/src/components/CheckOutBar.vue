@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 
 export default {
     props: {
@@ -54,7 +56,16 @@ export default {
         getLength: function () {
             this.length = this.myInput.length;
         }
-    },
+    },created() {
+    axios
+      .get("http://localhost:3000/" )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
 
 }

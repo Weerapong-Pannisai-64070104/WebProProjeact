@@ -3,10 +3,9 @@
     <div class="w-full min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
       <div class="w-full sm:max-w-md p-5 mx-auto">
         <h2 class="mb-12 text-center text-5xl font-extrabold">Welcome.</h2>
-    
           <div class="mb-4">
             <label class="block mb-1" for="email">Email-Address</label>
-            <input v-model="e" id="email" type="text" name="email"
+            <input v-model="e" id="email" type="email" name="email"
               class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
           </div>
           <div class="mb-4">
@@ -33,7 +32,7 @@ import axios from 'axios';
 
   export default {
     data() {
-      return{
+      return{ 
          e:"",
       pass: "",
       }
