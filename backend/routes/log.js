@@ -37,7 +37,41 @@ router.post('/SignIn',async function(req, res, next){
   }
 
 });
+router.post('/SignUp',async function(req, res, next){
+  // const conn = await pool.getConnection()
+  // // Begin transaction
+  // await conn.beginTransaction();
+  const fname = req.body.fname;
+  const lname = req.body.lname;
+  const email = req.body.email;
+  const password = req.body.password;
+  const conpassword = req.body.conpassword;
+  const address = req.body.address;
+  const pnum = req.body.pnum;
+  console.log(req.body)
+  try{
+    let results2 = await pool.query(
+          "SELECT email from Customer where email = ? ;",
+          [email]
+          
+          );console.log(results2)
+          if(results2[0].length > 0){
+            res.status(401).json("This E-mail already in exit!")
+        }
+    else if(password == conpassword && results2[0].length == 0){
+      await pool.query(
+      "INSERT INTO Customer(fname, lname, email, password, address, phone_num, start_membership) VALUES(?, ?, ?, ?,? ,?,NOW());",
+        [fname,lname,email, password, address, pnum]
+        );
+        res.json("success")  
+    }else{
+            throw new Error(error)
+          }    
+  } catch (err) {
+    res.status(401).json("Please fill these required information.")
+  }
 
+});
 // Create new comment
 router.post('/:blogId/comments', function(req, res, next){
     return
