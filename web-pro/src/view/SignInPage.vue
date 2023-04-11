@@ -38,6 +38,7 @@ import axios from 'axios';
       }
     }, methods: {
       submit() {
+      this.$store.commit('login',this.e)
       var formData = new FormData();
       formData.append("email", this.e);
       formData.append("password", this.pass);
