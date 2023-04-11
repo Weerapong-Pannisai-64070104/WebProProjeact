@@ -54,7 +54,16 @@ export default {
         getLength: function () {
             this.length = this.myInput.length;
         }
-    },
+    },created() {
+    axios
+      .get("http://localhost:3000/" )
+      .then((response) => {
+        console.log(this.book);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
 
 }
