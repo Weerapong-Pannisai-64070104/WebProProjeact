@@ -123,6 +123,13 @@
                     'block px-4 py-2 text-sm text-gray-700',
                   ]">Sign Up</a>
                   </MenuItem>
+                  <MenuItem v-slot="{ active }">
+                  <a href="/UserProfile" :class="[
+                    active ? 'bg-gray-100' : '',
+                    'block px-4 py-2 text-sm text-gray-700',
+                  ]">Profile</a>
+                  </MenuItem>
+                  
                 </MenuItems>
               </transition>
             </Menu>
@@ -169,6 +176,7 @@ const navigation = [{ name: "Home", href: "/", current: false }];
 const Open = ref(false);
 </script>
 <script>
+/* eslint-disable */ import axios from 'axios'; 
 export default {
   props: {
     cart: Array,
@@ -179,6 +187,8 @@ export default {
   data() {
     return {
       active: false,
+      typelog: ""
+
     };
   },
   methods: {
@@ -190,6 +200,12 @@ export default {
       window.location.href = "/CheckOut";
     },
   },
+  computed: {
+    userType() {
+      return this.$store.getters.userType
+    },
+  },
+
 };
 </script>
 
