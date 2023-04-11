@@ -15,7 +15,7 @@ router.post('/SignIn',async function(req, res, next){
   await conn.beginTransaction();  
   const email = req.body.email;
   const password = req.body.password;
-  console.log(req.body)
+
   try{
     let results = await conn.query(
         "SELECT * from Customer where email = ? and password = ?;",
