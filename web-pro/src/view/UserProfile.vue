@@ -168,7 +168,8 @@ export default {
             lname: "",
             numphone: "",
             useremail: "",
-            email: this.$store.state.email
+            email: this.$store.state.email,
+            customer_info:null
         };
     }, methods: {
         addToCart(products) {
@@ -205,16 +206,17 @@ export default {
 
         },
     }, created() {
+      
         if (localStorage.cart == undefined) {
             this.cart = [];
         } else {
             this.cart = JSON.parse(localStorage.cart);
         }
         axios
-            .get("http://localhost:3000/User", { params: { email: this.email } })
+            .get("http://localhost:3000/User", {params:{ email: this.email }} )
             .then((response) => {
-                this.book = response.data.book;
-                console.log(this.book);
+                this.customer_info = response.data.customer_info;
+                console.log(this.customer_info);
             })
             .catch((err) => {
                 console.log(err);

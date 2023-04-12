@@ -13,15 +13,28 @@ router.get("/", async function (req, res, next) {
   }
 });
 router.get("/User", async function (req, res, next) {
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
+  const email = req.query.email
   
   try {
-    let params = []
-    const result = await pool.query("SELECT c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c JOIN Book_possession bp ON c.customer_id = bp.customer_id where c.customer_id = ?;",
-    [1])
+    let results1 = await conn.query("SELECT customer_id FROM Customer WHERE email = ?;",
+    [email])
+   
+    const cusID = results1[0][0]
+    let result = await conn.query("SELECT c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c JOIN Book_possession bp ON c.customer_id = bp.customer_id where c.customer_id = ?;",
+    [cusID.customer_id])
       res.json( { customer_info:result[0]
-    });console.log(result[0])
-  } catch (err) {
-    return next(err)
+    })
+    console.log(result)
+
+   
+  } catch (error) {
+    await conn.rollback();
+    next(error);
+  } finally {
+    console.log('finally')
+    conn.release();
   }
 });
 
