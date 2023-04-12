@@ -9,15 +9,23 @@
                         <!-- Profile Card -->
                         <div class="bg-white p-3 border-t-4 border-gray-700 ">
                             <div class="image overflow-hidden">
-                                <img class="h-auto w-full mx-auto"
-                                    src="https://kfanz.com/wp-content/uploads/2023/03/images28129.jpeg" alt="">
+
+                                <input class="file-input hidden" type="file" id="file-input" ref="file"
+                                    @change="handleFileUpload()" />
+                                <label for="file-input">
+                                    <img class="h-auto w-full mx-auto"
+                                    :src="`http://localhost:3000/${customer_info[0].customer_img}`" alt="">
+                                </label>
+
+
                             </div>
-                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{customer_info[0].fname}}  {{customer_info[0].lname}}</h1>
+                            <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ customer_info[0].fname }}
+                                {{ customer_info[0].lname }}</h1>
                             <ul
                                 class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                 <li class="flex items-center py-3">
                                     <span>Member since</span>
-                                    <span class="ml-auto">{{customer_info[0].start_membership.slice(0,10)}}</span>
+                                    <span class="ml-auto">{{ customer_info[0].start_membership.slice(0, 10) }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -50,21 +58,23 @@
                                         <div class="px-4 py-2 font-semibold">Customer ID:</div>
                                         <div class="px-4 py-2">{{ customer_info[0].customer_id }}</div>
                                     </div>
-                                    <div class="grid md:grid-cols-2 text-l" >
+                                    <div class="grid md:grid-cols-2 text-l">
 
                                         <div class="flex">
                                             <div class="px-4 py-2 font-semibold">First Name:</div>
-                                            <div class="px-4 py-2">{{customer_info[0].fname}}</div>
-                                            <input v-model="fname" v-show="editform" type="text" name="fname" placeholder="New first name">
+                                            <div class="px-4 py-2">{{ customer_info[0].fname }}</div>
+                                            <input v-model="fname" v-show="editform" type="text" name="fname"
+                                                placeholder="New first name">
                                         </div>
                                         <div class="flex">
                                             <div class="px-4 py-2 font-semibold">Last Name:</div>
                                             <div class="px-4 py-2">{{ customer_info[0].lname }}</div>
-                                            <input v-model="lname" v-show="editform" type="text" name="lname" placeholder="New last name">
+                                            <input v-model="lname" v-show="editform" type="text" name="lname"
+                                                placeholder="New last name">
                                         </div>
                                         <div class="flex">
                                             <div class="px-4 py-2 font-semibold">Contact No:</div>
-                                            <div class="px-4 py-2">{{customer_info[0].phone_num}}</div>
+                                            <div class="px-4 py-2">{{ customer_info[0].phone_num }}</div>
                                             <input v-model="numphone" v-show="editform" type="text" name="numphone"
                                                 placeholder="New phone number">
                                         </div>
@@ -73,7 +83,8 @@
                                             <div class="px-4 py-2">
                                                 {{ customer_info[0].email }}
                                             </div>
-                                            <input v-model="newemail" v-show="editform" type="text" name="email" placeholder="New Email">
+                                            <input v-model="newemail" v-show="editform" type="text" name="email"
+                                                placeholder="New Email">
                                         </div>
 
                                     </div>
@@ -115,7 +126,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in customer_info" :key="item.isbn" class="bg-white border-b dark:bg-gray-300">
+                                    <tr v-for="item in customer_info" :key="item.isbn"
+                                        class="bg-white border-b dark:bg-gray-300">
                                         <td class="px-6 py-4">
                                             <img class="object-contain h-20 w-30" :src="item.book_img"
                                                 alt="Placeholder image" />
@@ -124,7 +136,7 @@
                                             {{ item.book_name }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{item.end_of_date.slice(0,10)}}
+                                            {{ item.end_of_date.slice(0, 10) }}
                                         </td>
 
                                         <td class="px-6 py-4 text-right">
@@ -151,6 +163,7 @@
 import NavBar from "../components/NavBar.vue";
 // import booklist from "../components/book.json"
 import axios from "axios";
+
 export default {
 
     name: "App",
@@ -164,11 +177,14 @@ export default {
             fname: "",
             lname: "",
             numphone: "",
-            newemail:"",
+            newemail: "",
             email: this.$store.state.email,
-            customer_info:null
+            customer_info: null,
+            file: null,
+            
         };
     }, methods: {
+
         addToCart(products) {
             this.cart.push(products)
             localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -177,21 +193,35 @@ export default {
             this.cart = []
             localStorage.setItem("cart", JSON.stringify(this.cart));
 
-        }, submit() {
+        }, handleFileUpload() {
+            this.file = this.$refs.file.files[0];
+            console.log(this.file)
+        },
+        submit() {
             var formData = new FormData();
+            formData.append("profile_img", this.file);
             formData.append("fname", this.fname);
             formData.append("lname", this.lname);
             formData.append("email", this.newemail);
             formData.append("numphone", this.numphone);
+            formData.append("customer_id", this.customer_info[0].customer_id);
             axios
                 .put("http://localhost:3000/NewUser", formData, {
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "multipart/form-data",
                     },
+                    
                 })
                 .then((response) => {
                     this.$router.push({ path: "/UserProfile" }); // Success! -> redirect to home page
                     console.log(response)
+                    
+                    if(this.newemail == ""){
+                        this.$store.commit('login',this.email)
+                    }else{
+                        this.$store.commit('login',this.newemail)
+                    }
+                    
                 })
                 .catch((error) => {
                     alert(error.response.data)
@@ -200,14 +230,14 @@ export default {
 
         },
     }, created() {
-      
+
         if (localStorage.cart == undefined) {
             this.cart = [];
         } else {
             this.cart = JSON.parse(localStorage.cart);
         }
         axios
-            .get("http://localhost:3000/User", {params:{ email: this.email }} )
+            .get("http://localhost:3000/User", { params: { email: this.email } })
             .then((response) => {
                 this.customer_info = response.data.customer_info;
                 console.log(this.customer_info);

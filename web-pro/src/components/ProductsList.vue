@@ -73,7 +73,7 @@
             >
             <router-link to="/Product" class="underline">
               <img
-                :src="product.book_img"
+                :src="`http://localhost:3000/${product.book_img}`"
                 class="h-full w-full object-cover object-center group-hover:opacity-80"
               />
             
