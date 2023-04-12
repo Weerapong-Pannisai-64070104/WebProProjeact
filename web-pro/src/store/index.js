@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 const storagePlugin = store => {
-    // Listen for changes to the local storage and update the store
+ 
     window.addEventListener('storage', event => {
       if (event.key === 'email') {
         const prevId = store.state.email

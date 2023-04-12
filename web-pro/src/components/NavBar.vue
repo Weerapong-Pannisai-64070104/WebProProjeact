@@ -209,9 +209,7 @@ export default {
       window.location.href = "/CheckOut";
     },
     logout(){
-      
       this.$store.commit('logout')
-    
     }
   },
   computed: {
