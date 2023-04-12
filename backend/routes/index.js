@@ -22,11 +22,11 @@ router.get("/User", async function (req, res, next) {
     [email])
    
     const cusID = results1[0][0]
-    let result = await conn.query("SELECT c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c JOIN Book_possession bp ON c.customer_id = bp.customer_id where c.customer_id = ?;",
+    let result = await conn.query("SELECT b.book_name , c.start_membership, bo.date_of_borrow, bo.end_of_date, b.book_img, c.customer_id, c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c JOIN Book_possession bp ON c.customer_id = bp.customer_id JOIN Books b on bp.isbn = b.isbn JOIN Book_order bo on c.customer_id = bo.customer_id JOIN Book_order_line bol on bol.order_id= bo.order_id where c.customer_id = ? group by b.book_name;;",
     [cusID.customer_id])
       res.json( { customer_info:result[0]
     })
-    console.log(result)
+    console.log(result[0])
 
    
   } catch (error) {
