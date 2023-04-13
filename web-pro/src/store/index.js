@@ -1,7 +1,17 @@
 import { createStore } from "vuex";
+const storagePlugin = store => {
+ 
+    window.addEventListener('storage', event => {
+      if (event.key === 'email') {
+        const prevId = store.state.email
+        store.commit('login',prevId)
+      }
+    })
+  }
 export default  createStore({
     state:{
         email:"",
+        prevId: '' 
     },
     getters:{
 
@@ -24,7 +34,7 @@ export default  createStore({
     },
     actions:{
 
-    },
+    },  plugins: [storagePlugin],
     modules:{
 
     }
