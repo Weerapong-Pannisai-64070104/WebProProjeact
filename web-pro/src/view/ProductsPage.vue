@@ -1,5 +1,6 @@
 
 <template>
+    <div>
     <NavBar />
     <div class="bg-white">
         <div class="pt-6">
@@ -100,9 +101,9 @@
             </div>
         </div>
     </div>
-    
+    </div>
 </template>
-  
+
 <script setup>
 import NavBar from '../components/NavBar.vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
