@@ -24,8 +24,14 @@ export default {
       cart:[]
     };
   },methods:{
-    addToCart(products) {
-      this.cart.push(products)
+    addToCart(products) {87
+       const exitproduct = this.cart.find(cartproduct => cartproduct.isbn === products.isbn)
+       if(exitproduct){
+        alert('This book is already in your cart.')
+       }else{
+        this.cart.push(products)
+       }
+      
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
     clearCart() {

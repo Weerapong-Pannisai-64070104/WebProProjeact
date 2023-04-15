@@ -216,6 +216,9 @@ export default {
     userType() {
       return this.$store.getters.userType
     },
+    cartValue(){
+      let newcart = this.cart
+    }
   },
 
 };

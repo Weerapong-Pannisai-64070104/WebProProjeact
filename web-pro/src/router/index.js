@@ -5,13 +5,19 @@ import SignInPage from '@/view/SignInPage.vue';
 import SignUpPage from '@/view/SignUpPage.vue';
 import CheckOutPage from '@/view/CheckOutPage.vue';
 import UserProfile from '@/view/UserProfile.vue';
-
+import AddMin from '@/view/AddMin.vue';
 
 const routes = [
     {
         path: '/',
         name: 'Home',
         component:  Home
+        
+    },
+    {
+        path: '/Addmin',
+        name: 'Addmin',
+        component:  AddMin
         
     },
     {
