@@ -111,7 +111,6 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
   const publisher_name = req.body.publisher_name
   const file = req.file;
   const type = req.body.type;
-
   try {
     let oldisbn = await conn.query(
       "SELECT isbn FROM Books where isbn = ?;", [
@@ -133,14 +132,16 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
       let pubid = await conn.query(
         "SELECT publisher_id FROM Publisher where publisher_name = ?;", [
         publisher_name])
-
-      if (pubid[0].length == 0) { //นี่คือไม่มีpublisherเลยadd
+          console.log(pubid)
+          pubid = pubid[0][0].published_id
+      if (!pubid) { //นี่คือไม่มีpublisherเลยadd
         let newpub = await conn.query(
           "INSERT INTO Publisher(publisher_name) values(?);", [
           publisher_name]
         )
         pubid = newpub[0].insertId
       }
+      
       if (file) {
         let newbook = await conn.query(
           "INSERT INTO Books VALUES(?,?,?,?,?,?,?);",
@@ -180,6 +181,7 @@ router.get("/book", async function (req, res, next) {
       "SELECT b.* ,c.*,a.* ,t.* FROM Books b  JOIN publisher c USING(publisher_id) join book_author USING(isbn) join Author a using(author_id) join book_type using(isbn) join Type t using(type_id);"
     )
       res.send(book[0])
+      console.log(book)
   } catch (error) {
     next(error)
   }

@@ -13,7 +13,7 @@
                                 <input class="file-input hidden" type="file" id="file-input" ref="file"
                                     @change="handleFileUpload()" />
                                 <label for="file-input">
-                                    <img class="h-auto w-full mx-auto"
+                                    <img class="h-50 w-50 mx-auto"
                                     :src="customer_info[0].customer_img ? `http://localhost:3000/${customer_info[0].customer_img}`:'https://bulma.io/images/placeholders/640x360.png'" alt="">
                                 </label>
                             </div>
@@ -127,7 +127,7 @@
                                     <tr v-for="item in customer_info" :key="item.isbn"
                                         class="bg-white border-b dark:bg-gray-300">
                                         <td v-if="item.book_img" class="px-6 py-4">
-                                            <img class="object-contain h-20 w-30" :src="item.book_img"
+                                            <img class="object-contain h-20 w-30" :src="`http://localhost:3000/${item.book_img}`"
                                                 alt="Placeholder image" />
                                         </td>
                                         <td v-if="item.book_name" class="px-6 py-4">
