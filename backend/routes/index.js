@@ -33,7 +33,7 @@ router.get("/User", async function (req, res, next) {
       [email])
 
     const cusID = results1[0][0]
-    let result = await conn.query("SELECT b.book_name , c.customer_img, c.start_membership, bo.date_of_borrow, bo.end_of_date, b.book_img, c.customer_id, c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c JOIN Book_possession bp ON c.customer_id = bp.customer_id JOIN Books b on bp.isbn = b.isbn JOIN Book_order bo on c.customer_id = bo.customer_id JOIN Book_order_line bol on bol.order_id= bo.order_id where c.customer_id = ? group by b.book_name;;",
+    let result = await conn.query("SELECT b.book_name , c.customer_img, c.start_membership, bo.date_of_borrow, bo.end_of_date, b.book_img, c.customer_id, c.fname, c.lname, c.email, c.phone_num, bp.isbn FROM Customer c left JOIN Book_possession bp ON c.customer_id = bp.customer_id left JOIN Books b on bp.isbn = b.isbn left JOIN Book_order bo on c.customer_id = bo.customer_id left JOIN Book_order_line bol on bol.order_id= bo.order_id where c.customer_id = ? group by b.book_name;",
       [cusID.customer_id])
     res.json({
       customer_info: result[0]
@@ -170,6 +170,18 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
   } finally {
     console.log('finally')
     conn.release();
+  }
+});
+
+router.get("/book", async function (req, res, next) {
+ 
+  try {
+    let book = await pool.query(
+      "SELECT b.* ,c.*,a.* ,t.* FROM Books b  JOIN publisher c USING(publisher_id) join book_author USING(isbn) join Author a using(author_id) join book_type using(isbn) join Type t using(type_id);"
+    )
+      res.send(book[0])
+  } catch (error) {
+    next(error)
   }
 });
 exports.router = router;

@@ -14,10 +14,8 @@
                                     @change="handleFileUpload()" />
                                 <label for="file-input">
                                     <img class="h-auto w-full mx-auto"
-                                    :src="`http://localhost:3000/${customer_info[0].customer_img}`" alt="">
+                                    :src="customer_info[0].customer_img ? `http://localhost:3000/${customer_info[0].customer_img}`:'https://bulma.io/images/placeholders/640x360.png'" alt="">
                                 </label>
-
-
                             </div>
                             <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{ customer_info[0].fname }}
                                 {{ customer_info[0].lname }}</h1>
@@ -128,18 +126,18 @@
                                 <tbody>
                                     <tr v-for="item in customer_info" :key="item.isbn"
                                         class="bg-white border-b dark:bg-gray-300">
-                                        <td class="px-6 py-4">
+                                        <td v-if="item.book_img" class="px-6 py-4">
                                             <img class="object-contain h-20 w-30" :src="item.book_img"
                                                 alt="Placeholder image" />
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td v-if="item.book_name" class="px-6 py-4">
                                             {{ item.book_name }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td v-if="item.end_of_date" class="px-6 py-4">
                                             {{ item.end_of_date.slice(0, 10) }}
                                         </td>
 
-                                        <td class="px-6 py-4 text-right">
+                                        <td  v-if="item.book_name" class="px-6 py-4 text-right">
                                             <a href="#" class="text-xl font-medium mx-10 my-1 btn btn-secondary">Read</a>
                                         </td>
                                     </tr>
