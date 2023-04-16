@@ -132,7 +132,7 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
       let pubid = await conn.query(
         "SELECT publisher_id FROM Publisher where publisher_name = ?;", [
         publisher_name])
-          console.log(pubid)
+        
           pubid = pubid[0][0].published_id
       if (!pubid) { //นี่คือไม่มีpublisherเลยadd
         let newpub = await conn.query(
