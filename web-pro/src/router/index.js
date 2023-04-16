@@ -5,7 +5,7 @@ import SignInPage from '@/view/SignInPage.vue';
 import SignUpPage from '@/view/SignUpPage.vue';
 import CheckOutPage from '@/view/CheckOutPage.vue';
 import UserProfile from '@/view/UserProfile.vue';
-
+import AddMin from '@/view/AddMin.vue';
 
 const routes = [
     {
@@ -17,6 +17,18 @@ const routes = [
     {
         path: '/Products/:id',
         name: 'Products',
+        component: ProductsPage
+    },
+    {
+        
+        path: '/Addmin',
+        name: 'Addmin',
+        component:  AddMin
+        
+    },
+    {
+        path: '/Product',
+        name: 'Product',
         component: ProductsPage,
         
     },
