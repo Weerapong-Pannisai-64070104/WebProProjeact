@@ -186,4 +186,16 @@ router.get("/book", async function (req, res, next) {
     next(error)
   }
 });
+router.delete("/bookdel", async function (req, res, next) {
+ 
+  try {
+    let delbook = await pool.query(
+      "DELETE FROM Books where isbn = ?;",[req.query.isbn]
+    )
+    res.send("success")
+      
+  } catch (error) {
+    next(error)
+  }
+});
 exports.router = router;
