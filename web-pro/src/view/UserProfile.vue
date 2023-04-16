@@ -138,8 +138,10 @@
                                         </td>
 
                                         <td  v-if="item.book_name" class="px-6 py-4 text-right">
-                                            <a href="#" class="text-xl font-medium mx-10 my-1 btn btn-secondary">Read</a>
+                                            <button href="#" class="text-xl font-medium mx-10 my-1 btn btn-secondary">Read</button>
+                                            <button href="#" class="text-xl font-medium mx-10 my-1 btn btn-secondary">Return</button>
                                         </td>
+                                       
                                     </tr>
                                 </tbody>
                             </table>
