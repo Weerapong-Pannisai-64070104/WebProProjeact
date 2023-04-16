@@ -15,6 +15,12 @@ const routes = [
         
     },
     {
+        path: '/Products/:id',
+        name: 'Products',
+        component: ProductsPage
+    },
+    {
+        
         path: '/Addmin',
         name: 'Addmin',
         component:  AddMin

@@ -76,11 +76,12 @@
                 :src="`http://localhost:3000/${product.book_img}`"
                 class="h-full w-full object-cover object-center group-hover:opacity-80"
               />
-            
             </router-link>
-              
-              
+            <router-link :to="{name: 'Products' , params: { id: product.isbn }}" class="card-footer-item">Read
+                  more...
+                </router-link>
             </div>
+            <!-- <router-link :to="{name: 'Products' , params: { id: product.isbn }}"> Home page </router-link> -->
           <!-- </router-link> -->
           <h3 class="mx-4 text-gray-700 text-l text-center">
             {{ product.book_name }}
