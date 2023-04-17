@@ -6,7 +6,7 @@
             <div class="container max-w-s mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 class="mb-8 text-3xl text-center">Add new Book</h1>
-                    <form>
+                    <form @submit.prevent="submit">
                         <label for="isbn">ISBN:</label>
                         <input type="text" class="border border-grey-light w-full  rounded mb-4" id="isbn" v-model="isbn"
                             required><br>

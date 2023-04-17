@@ -26,9 +26,12 @@ router.post('/SignIn',async function(req, res, next){
           [email, password]
           );
           if(results[0].length != 0){
-            res.json(results[0])
+            const val ={result:results[0] , message: "customer"}
+            res.json(val)
+            
           }else if(results2[0].length != 0){
-            res.json(results2[0])
+            const val2 ={result:results2[0] , message: "Addmin"}
+            res.json(val2)
           }else{
             throw new Error(error)
           }

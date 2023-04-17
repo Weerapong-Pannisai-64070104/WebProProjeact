@@ -49,7 +49,12 @@ import axios from 'axios';
           },
         })
         .then((response) => {
-          this.$router.push({ path: "/" }); // Success! -> redirect to home page
+          if(response.data.message == "Addmin"){
+             this.$router.push({ path: "/Addmin" });
+          }else{
+            this.$router.push({ path: "/" });
+          }
+          // Success! -> redirect to home page
           console.log(response)
           
         })
