@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -49,10 +49,10 @@
                                 <tbody>
                                   <tr v-for="item in cart" :key="item.isbn">
                                     <td class="px-4 py-2">
-                                      <img class="object-contain h-20 w-30" :src="`http://localhost:3000/${item.book_img}`"
-                                        alt="Placeholder image" />
+                                      <img class="object-contain h-20 w-30"
+                                        :src="`http://localhost:3000/${item.book_img}`" alt="Placeholder image" />
                                     </td>
-                                    <td class="px-4 py-2">{{item.book_name}}</td>
+                                    <td class="px-4 py-2">{{ item.book_name }}</td>
 
                                   </tr>
                                 </tbody>
@@ -74,10 +74,6 @@
             </TransitionRoot>
           </div>
           <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <!-- <div class="flex flex-shrink-0 items-center">
-            <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
-            <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
-          </div> -->
 
             <div class="hidden sm:ml-6 sm:block">
               <div class="flex space-x-4">
@@ -87,7 +83,7 @@
                     : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'rounded-md px-3 py-2 text-sm font-medium',
                 ]" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-                
+
               </div>
             </div>
           </div>
@@ -99,13 +95,13 @@
 
             <!-- Profile dropdown -->
             <Menu as="div" class="relative ml-3">
-              <div v-for="item in pro" :key="item.customer_id">
+              <div>
                 <MenuButton
-                class="ml-5 flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                <img class="h-9 w-9 rounded-full"
-                  :src="item.customer_img ? `http://localhost:3000/${item.customer_img }` : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'"
-                  alt="Profile Image" />
-              </MenuButton>
+                  class="flex rounded-full  text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 ml-5">
+                  <img class="h-9 w-9 rounded-full"
+                    :src="pro ? `http://localhost:3000/${pro}` : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'"
+                    alt="Profile Image" />
+                </MenuButton>
               </div>
               <transition enter-active-class="transition ease-out duration-100"
                 enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
@@ -130,10 +126,10 @@
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   ]">Profile</a>
-                  
+
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                  <a v-show="$store.state.email" @click="logout()"  :class="[
+                  <a v-show="$store.state.email" @click="logout()" :class="[
                     active ? 'bg-gray-100' : '',
                     'block px-4 py-2 text-sm text-gray-700',
                   ]">Sign Out</a>
@@ -156,7 +152,7 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
-    
+
   </div>
 </template>
 
@@ -184,7 +180,7 @@ const navigation = [{ name: "Home", href: "/", current: false }];
 const Open = ref(false);
 </script>
 <script>
-/* eslint-disable */ import axios from 'axios'; 
+/* eslint-disable */ import axios from 'axios';
 export default {
   props: {
     cart: Array,
@@ -196,7 +192,7 @@ export default {
     return {
       active: false,
       typelog: "",
-      pro:null
+      pro: null
     };
   },
   methods: {
@@ -207,29 +203,30 @@ export default {
       localStorage.setItem("cart", JSON.stringify(this.cart));
       window.location.href = "/CheckOut";
     },
-    logout(){
+    logout() {
       this.$store.commit('logout')
+      location.reload()
     }
   },
   computed: {
     userType() {
       return this.$store.getters.userType
     },
-    cartValue(){
+    cartValue() {
       let newcart = this.cart
     }
-  },created() {
+  }, created() {
 
-axios
-    .get("http://localhost:3000/propic", {params:{mail: this.$store.state.email,}})
-    .then((response) => {
-        this.pro = response.data;
-        console.log(this.pro)
-    })
-    .catch((error) => {
+    axios
+      .get("http://localhost:3000/propic", { params: { mail: this.$store.state.email, } })
+      .then((response) => {
+        this.pro = response.data.propic[0].customer_img;
+        console.log(response.data.propic[0].customer_img)
+      })
+      .catch((error) => {
         alert(error.response.data)
-    });
-}
+      });
+  }
 
 };
 

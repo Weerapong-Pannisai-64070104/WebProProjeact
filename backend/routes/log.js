@@ -81,7 +81,7 @@ router.get("/propic", async function (req, res, next) {
       "SELECT customer_img from Customer where email = ? ;",
       [req.query.mail]
     )
-    res.send(propic[0])
+    res.json({propic: propic[0]})
       
   } catch (error) {
     next(error)
