@@ -101,9 +101,8 @@
             <Menu as="div" class="relative ml-3">
               <div v-for="item in pro" :key="item.customer_id">
                 <MenuButton
-                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full"
+                class="ml-5 flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <img class="h-9 w-9 rounded-full"
                   :src="item.customer_img ? `http://localhost:3000/${item.customer_img }` : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'"
                   alt="Profile Image" />
               </MenuButton>

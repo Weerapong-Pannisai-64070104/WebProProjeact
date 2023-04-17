@@ -67,48 +67,7 @@ router.get("/blogs/create", async function (req, res, next) {
 //   res.redirect('/')
 // });
 
-router.get("/product/:id", async function (req, res, next) {
-  const conn = await pool.getConnection()
-  await conn.beginTransaction();
- try{
-  const promise1 = pool.query("SELECT * FROM books join book_author using(isbn) join author using (author_id) WHERE isbn=?", [
-    req.params.id,
-  ]);
-  // const promise2 = pool.query("SELECT * FROM comments left outer join images on comments.id = images.comment_id WHERE comments.blog_id=? order by comment_date", [
-  //   req.params.id,
-  // ]);
-  // const promise3 = pool.query("SELECT * FROM images WHERE blog_id=? and comment_id is null", [
-  //   req.params.id,
 
-  // ]);
-  console.log(promise1[0])
-  Promise.all([promise1])
-    .then((results) => {
-      const books = results[0];
-      // const comments = results[1];
-      // const image = results[2];
-      res.json({
-        book: books[0][0],
-        // images: image[0],
-        // comments: comments[0],
-        error: null,
-      });
-      
-    })
-    .catch((err) => {
-      return next(err);
-    });
- }catch (err) {
-    await conn.rollback();
-    next(err);
-  } finally {
-    console.log('finally')
-    conn.release();
-  }
-  
-
-  
-});
 
 router.put('/blogs/:id', upload.single('myImage'), async (req, res, next) => {
 

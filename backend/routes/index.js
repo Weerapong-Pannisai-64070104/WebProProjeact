@@ -198,4 +198,28 @@ router.delete("/bookdel", async function (req, res, next) {
     next(error)
   }
 });
+
+router.get("/product/:id", async function (req, res, next) {
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
+ try{
+  const selbook = await conn.query("SELECT * FROM books join book_author using(isbn) join author using (author_id) WHERE isbn=?", [
+    req.params.id,
+  ]);
+  const result = await conn.query("SELECT * FROM Comments join Customer using(customer_id) WHERE isbn=?", [
+    req.params.id,
+  ]);
+
+ res.json({book:selbook[0][0], comment:result[0]}) 
+  
+ conn.commit()
+ }catch (err) {
+    await conn.rollback();
+    next(err);
+  } finally {
+    console.log('finally')
+    conn.release();
+  }
+});
+
 exports.router = router;

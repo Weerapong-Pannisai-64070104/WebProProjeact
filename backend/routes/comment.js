@@ -23,27 +23,24 @@ router.get('/:blogId/comments', function(req, res, next){
 });
 
 // Create new comment
-router.post('/:blogId/comments',upload.single('blog_image'), async function(req, res, next){
+router.post('/:id/comments', async function(req, res, next){
     const conn = await pool.getConnection()
     // Begin transaction
     await conn.beginTransaction();
-    const file = req.file;
     const comment = req.body.comment;
+    console.log(req.body)
     try {
+      let cusid = await pool.query(
+        "SELECT customer_id from Customer where email = ? ;",
+        [req.body.mail]
+      )
+      console.log(cusid[0][0])
         let results = await conn.query(
-          "INSERT INTO comments(blog_id, comment, comments.like, comment_by_id) VALUES(?, ?, ?, ?);",
-          [req.params.blogId, comment,'0',null]
+          "INSERT INTO comments( isbn, customer_id, comment,created_when) VALUES(?, ?, ?, NOW());",
+          [req.params.id, cusid[0][0].customer_id,comment]
         )
-        const blogId = results[0].insertId;
-    if(file){
-        await conn.query(
-          "INSERT INTO images(blog_id, file_path,comment_id) VALUES(?, ?, ?);",
-          [req.params.blogId, file.filename,blogId])
-    
-    }
-        
         await conn.commit()
-        res.redirect(`/blogs/${req.params.blogId}`);
+        res.json(cusid)
       } catch (err) {
         await conn.rollback();
         next(err);
