@@ -75,6 +75,18 @@ router.post('/SignUp',async function(req, res, next){
   }
 
 });
+router.get("/propic", async function (req, res, next) {
+  try {
+    let propic = await pool.query(
+      "SELECT customer_img from Customer where email = ? ;",
+      [req.query.mail]
+    )
+    res.send(propic[0])
+      
+  } catch (error) {
+    next(error)
+  }
+});
 // Create new comment
 router.post('/:blogId/comments', function(req, res, next){
     return

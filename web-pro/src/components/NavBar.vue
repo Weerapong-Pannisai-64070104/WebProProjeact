@@ -94,18 +94,19 @@
           <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <Button @click="Open = true"
               class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 focus:ring-offset-gray-800">
-              <span class="sr-only">Open user menu</span>
               <ShoppingBagIcon class="h-6 w-8 rounded-full text-white" src="" alt="" />
             </Button>
 
             <!-- Profile dropdown -->
             <Menu as="div" class="relative ml-3">
-              <div>
+              <div v-for="item in pro" :key="item.customer_id">
                 <MenuButton
-                  class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 ml-5 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                  <span class="sr-only">Open user menu</span>
-                  <UserIcon class="h-8 w-8 rounded-full text-white" src="" alt="" />
-                </MenuButton>
+                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full"
+                  :src="item.customer_img ? `http://localhost:3000/${item.customer_img }` : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'"
+                  alt="Profile Image" />
+              </MenuButton>
               </div>
               <transition enter-active-class="transition ease-out duration-100"
                 enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
@@ -178,7 +179,6 @@ import {
 import {
   Bars3Icon,
   XMarkIcon,
-  UserIcon,
   ShoppingBagIcon,
 } from "@heroicons/vue/24/outline";
 const navigation = [{ name: "Home", href: "/", current: false }];
@@ -196,8 +196,8 @@ export default {
   data() {
     return {
       active: false,
-      typelog: ""
-
+      typelog: "",
+      pro:null
     };
   },
   methods: {
@@ -219,7 +219,18 @@ export default {
     cartValue(){
       let newcart = this.cart
     }
-  },
+  },created() {
+
+axios
+    .get("http://localhost:3000/propic", {params:{mail: this.$store.state.email,}})
+    .then((response) => {
+        this.pro = response.data;
+        console.log(this.pro)
+    })
+    .catch((error) => {
+        alert(error.response.data)
+    });
+}
 
 };
 
