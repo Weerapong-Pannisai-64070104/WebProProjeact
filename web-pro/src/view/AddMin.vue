@@ -62,9 +62,13 @@
                 </div>
             </div>
         </div>
+        
         <div class="">
+            <button class="mt-1 float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" v-show="$store.state.email" @click="logout()" >Sign Out</button>
             <h2>Book Information</h2>
+            
             <div class=" tbl-fixed">
+                
                 <table class="table-auto border-spacing-px min-w-max ">
                     <thead>
                         <tr class="sticky top-0">
@@ -106,6 +110,7 @@
                                 book_type</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <tr v-for="book in books" :key="book.isbn">
                             <td
@@ -157,7 +162,7 @@
                 </table>
             </div>
 
-
+           
         </div>
     </div>
 </template>
@@ -233,6 +238,7 @@ export default {
 
                 })
                 .then((response) => {
+
                     this.$router.push({ path: "/Addmin" }); // Success! -> redirect to home page
                     console.log(response)
                 })
@@ -241,7 +247,10 @@ export default {
                 });
 
 
-        }
+        },logout(){
+      this.$store.commit('logout')
+      this.$router.push({ path: "/SignIn" });
+    }
     }, created() {
 
         axios
