@@ -149,7 +149,7 @@
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.book_type }}</td>
-                            <td><button type="submit"
+                            <td><button type="submit" @click="edit(book)"
                                     class="w-full inline-flex 
                             items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold text-xs capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Edit</button>
                                 <button @click="del(book)"
@@ -198,6 +198,23 @@ export default {
         del(book) {
             axios
                 .delete("http://localhost:3000/bookdel", { params: { isbn: book.isbn } }, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then((response) => {
+                    this.books.splice(this.books.indexOf(book), 1)
+                    console.log(this.books)
+                    console.log(response)
+                    this.$emit('book', null)
+
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        },edit(book) {
+            axios
+                .put("http://localhost:3000/bookdel", { params: { isbn: book.isbn } }, {
                     headers: {
                         "Content-Type": "application/json",
                     },
