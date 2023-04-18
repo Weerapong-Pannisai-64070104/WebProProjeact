@@ -7,24 +7,24 @@
                 <form @submit.prevent="submitForm">
                     <div class="flex gap-x-2">
                         <input v-model="fname" type="text" class=" border border-grey-light w-full p-1.5 rounded mb-4"
-                            name="fname" placeholder="Full Name" required />
+                            name="fname" placeholder="Full Name"  />
 
                         <input v-model="lname" type="text" class=" border border-grey-light w-full p-1.5 rounded mb-4"
-                            name="lname" placeholder="Last Name" required />
+                            name="lname" placeholder="Last Name"  />
                     </div>
 
                     <input v-model="email" type="email" class="block border border-grey-light w-full p-1.5 rounded mb-4"
-                        name="email" placeholder="Email" required />
+                        name="email" placeholder="Email"  />
                     <input v-model="pnum" type="text" class="block border border-grey-light w-full p-1.5 rounded mb-4"
-                        name="pnum" placeholder="Phone Number" required />
+                        name="pnum" placeholder="Phone Number"  />
                     <input v-model="password" type="password"
                         class="block border border-grey-light w-full p-1.5 rounded mb-4" name="password"
-                        placeholder="Password" required />
+                        placeholder="Password"  />
                     <input v-model="conpassword" type="password"
                         class="block border border-grey-light w-full p-1.5 rounded mb-4" name="conpassword"
-                        placeholder="Confirm Password" required />
+                        placeholder="Confirm Password"  />
                     <textarea v-model="address" type="text" class="block border border-grey-light w-full p-1.5 rounded mb-4"
-                        name="address" placeholder="Address" required />
+                        name="address" placeholder="Address"  />
                     <button type="submit" @click="submit()"
                         class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Create
                         Account</button>
@@ -60,7 +60,6 @@ export default {
         }
     }, methods: {validateForm() {
             let errors = [];
-
             if (!this.fname) {
                 errors.push("Please enter your first name.");
             }

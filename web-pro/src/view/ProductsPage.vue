@@ -26,12 +26,6 @@
                 </div>
             </section>
         </div>
-
-
-
-
-
-
         <div class="max-w mx-auto px-5 ">
             <div class="flex justify-between items-center mb-6">
             </div>

@@ -8,7 +8,7 @@
                     <div class="w-full md:w-3/12 md:mx-2">
                         <!-- Profile Card -->
                         <div class="bg-white p-3 border-t-4 border-gray-700 ">
-                            <div class="image overflow-hidden">
+                            <div class="image overflow-hidden ">
 
                                 <input class="file-input hidden" type="file" id="file-input" ref="file"
                                     @change="handleFileUpload()" />
@@ -210,7 +210,6 @@ export default {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
-                    
                 })
                 .then((response) => {
                     this.$router.push({ path: "/UserProfile" }); // Success! -> redirect to home page

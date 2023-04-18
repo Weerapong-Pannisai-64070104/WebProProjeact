@@ -205,7 +205,8 @@ export default {
     },
     logout() {
       this.$store.commit('logout')
-      location.reload()
+      this.$router.push({ path: "/" });
+      this.pro = null
     }
   },
   computed: {

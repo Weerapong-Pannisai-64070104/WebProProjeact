@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+
 const storagePlugin = store => {
  
     window.addEventListener('storage', event => {
@@ -24,7 +25,6 @@ export default  createStore({
         },logout(state){
             state.email="";
             localStorage.removeItem("email");
-            
         },
         initializeStore(state){
             if(localStorage.getItem('email')){
