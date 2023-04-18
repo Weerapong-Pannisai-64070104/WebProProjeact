@@ -51,11 +51,11 @@ router.post('/SignUp', async function (req, res, next) {
   const address = req.body.address;
   const pnum = req.body.pnum;
   try {
-    let results2 = await pool.query(
+    let results2 = await conn.query(
       "SELECT email from Customer where email = ? ;",
       [email]
     );console.log(results2[0])
-    let results3 = await pool.query(
+    let results3 = await conn.query(
       "SELECT admin_email from Admin where admin_email = ? ;",
       [email]
     );console.log(results3[0])
@@ -65,7 +65,7 @@ router.post('/SignUp', async function (req, res, next) {
       res.status(401).json("This E-mail already in exit! Addmin")
     }
     else if (password == conpassword) {
-      await pool.query(
+      await conn.query(
         "INSERT INTO Customer(fname, lname, email, password, address, phone_num, start_membership) VALUES(?, ?, ?, ?,? ,?,NOW());",
         [fname, lname, email, password, address, pnum]
       );

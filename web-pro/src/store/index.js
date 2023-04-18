@@ -25,6 +25,7 @@ export default  createStore({
         },logout(state){
             state.email="";
             localStorage.removeItem("email");
+            localStorage.removeItem('cart')
         },
         initializeStore(state){
             if(localStorage.getItem('email')){

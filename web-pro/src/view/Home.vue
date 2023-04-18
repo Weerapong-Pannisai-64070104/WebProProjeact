@@ -28,7 +28,10 @@ export default {
        const exitproduct = this.cart.find(cartproduct => cartproduct.isbn === products.isbn)
        if(exitproduct){
         alert('This book is already in your cart.')
-       }else{
+       }else if(!this.$store.state.email){
+        alert("You must log in first.")
+       }
+       else{
         this.cart.push(products)
        }
       

@@ -47,7 +47,7 @@
                                 </thead>
 
                                 <tbody>
-                                  <tr v-for="item in cart" :key="item.isbn">
+                                  <tr v-for="item in newcart" :key="item.isbn">
                                     <td class="px-4 py-2">
                                       <img class="object-contain h-20 w-30"
                                         :src="`http://localhost:3000/${item.book_img}`" alt="Placeholder image" />
@@ -192,7 +192,8 @@ export default {
     return {
       active: false,
       typelog: "",
-      pro: null
+      pro: null,
+      newcart: this.cart
     };
   },
   methods: {
@@ -207,6 +208,7 @@ export default {
       this.$store.commit('logout')
       this.$router.push({ path: "/" });
       this.pro = null
+      this.newcart = null
     }
   },
   computed: {
