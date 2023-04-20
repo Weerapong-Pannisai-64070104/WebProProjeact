@@ -5,7 +5,8 @@
         <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-s mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 class="mb-8 text-3xl text-center">Add new Book</h1>
+                    <h1 v-show="!active" class="mb-8 text-3xl text-center">Add new Book</h1>
+                    <h1 v-show="active" class="mb-8 text-3xl text-center">Edit</h1>
                     <form @submit.prevent="submit">
                         <label for="isbn">ISBN:</label>
                         <input type="text" class="border border-grey-light w-full  rounded mb-4" id="isbn" v-model="isbn"
@@ -48,27 +49,32 @@
                         <select v-model="type">
                             <option selected value="None">None</option>
                             <option value="Fiction">Fiction</option>
-                            <option value="Fiction">Non-Fiction</option>
-                            <option value="Fiction">Children</option>
+                            <option value="Non-Fiction">Non-Fiction</option>
+                            <option value="Children">Children</option>
                         </select>
                         <div class="flex">
                             <label for="book_img">Book_Image: </label>
                             <input type="file" class="file-input" id="file-input" ref="file" @change="handleFileUpload()">
                         </div><br>
-                        <button type="submit" @click="submit()"
+                        <button v-show="!active"  @click="submit()"
                             class="w-full inline-flex items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Add
                             new book</button>
+                        
                     </form>
+                    <button v-show="active"  @click="update()"
+                            class="w-full inline-flex items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Update
+                            book</button>
                 </div>
             </div>
         </div>
-        
+
         <div class="">
-            <button class="mt-1 float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" v-show="$store.state.email" @click="logout()" >Sign Out</button>
+            <button class="mt-1 float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                v-show="$store.state.email" @click="logout()">Sign Out</button>
             <h2>Book Information</h2>
-            
+
             <div class=" tbl-fixed">
-                
+
                 <table class="table-auto border-spacing-px min-w-max ">
                     <thead>
                         <tr class="sticky top-0">
@@ -84,18 +90,14 @@
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 Published Date</th>
-                            <th
-                                class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
-                                publisher_id</th>
+                       
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 book_stock</th>
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 publisher_name</th>
-                            <th
-                                class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
-                                author_id</th>
+                     
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 author_name</th>
@@ -110,7 +112,7 @@
                                 book_type</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         <tr v-for="book in books" :key="book.isbn">
                             <td
@@ -121,22 +123,17 @@
                                 {{ book.book_name }}</td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-                                <img class="w-20 h-30" :src="`http://localhost:3000/${book.book_img}`" alt=""></td>
+                                <img class="w-20 h-30" :src="`http://localhost:3000/${book.book_img}`" alt="">
+                            </td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.publishered_date.slice(0, 10) }}</td>
-                            <td
-                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-                                {{ book.publisher_id }}</td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.book_stock }}</td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.publisher_name }}</td>
-                            <td
-                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-                                {{ book.author_id }}</td>
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.author_name }}</td>
@@ -149,12 +146,12 @@
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.book_type }}</td>
-                            <td><button type="submit" @click="edit(book)"
+                            <td><button  @click="edit(book)"
                                     class="w-full inline-flex 
-                            items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold text-xs capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Edit</button>
+                                items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold text-xs capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Edit</button>
                                 <button @click="del(book)"
                                     class="w-full inline-flex 
-                            items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md text-xs font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Delete</button>
+                                items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md text-xs font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Delete</button>
                             </td>
                         </tr>
 
@@ -162,18 +159,18 @@
                 </table>
             </div>
 
-           
+
         </div>
     </div>
 </template>
-  <style>
-  .tbl-fixed{
+<style>
+.tbl-fixed {
     overflow-y: scroll;
     overflow-x: scroll;
     height: fit-content;
     max-width: 1000px;
     max-height: 400px;
-  }
+}
 </style>
 <script>
 import axios from 'axios';
@@ -191,11 +188,15 @@ export default {
             alias: null,
             publisher_name: null,
             type: "None",
-            books: null
+            books: null,
+            active: false,
+            oldisbn:null,
+            oldfile:null
         };
     },
     methods: {
         del(book) {
+
             axios
                 .delete("http://localhost:3000/bookdel", { params: { isbn: book.isbn } }, {
                     headers: {
@@ -208,34 +209,31 @@ export default {
                     console.log(response)
                     this.$emit('book', null)
 
-                })
-                .catch((error) => {
-                    alert(error.response.data)
-                });
-        },edit(book) {
-            axios
-                .put("http://localhost:3000/bookdel", { params: { isbn: book.isbn } }, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                .then((response) => {
-                    this.books.splice(this.books.indexOf(book), 1)
-                    console.log(this.books)
-                    console.log(response)
-                    this.$emit('book', null)
 
                 })
                 .catch((error) => {
                     alert(error.response.data)
                 });
+        }, edit(book) {
+            this.oldfile = book.book_img
+            this.oldisbn = book.isbn
+            this.isbn = book.isbn
+            this.book_name = book.book_name
+            this.author = book.author_name
+            this.alias = book.author_alias
+            this.book_desc = book.book_desc
+            this.published_date = book.publishered_date.slice(0, 10)
+            this.publisher_name = book.publisher_name
+            this.book_stock = book.book_stock
+            this.type = book.book_type
+            this.active = true
         },
         handleFileUpload() {
             this.file = this.$refs.file.files[0];
             console.log(this.file)
         },
         submit() {
-            console.log(this.isbn)
+            
             var formData = new FormData();
             formData.append("book_img", this.file);
             formData.append("isbn", this.isbn);
@@ -255,8 +253,18 @@ export default {
 
                 })
                 .then((response) => {
-
-                    this.$router.push({ path: "/Addmin" }); // Success! -> redirect to home page
+                    this.file  = ""                   
+                    this.isbn = ""
+                    this.book_name = ""
+                    this.book_desc = ""
+                    this.published_date = ""
+                    this.publisher_name = ""
+                    this.book_stock = ""
+                    this.alias = ""
+                    this.author = ""
+                    this.type = ""
+                    this.books = response.data;
+                     // Success! -> redirect to home page
                     console.log(response)
                 })
                 .catch((error) => {
@@ -264,10 +272,51 @@ export default {
                 });
 
 
-        },logout(){
-      this.$store.commit('logout')
-      this.$router.push({ path: "/SignIn" });
-    }
+        }, logout() {
+            this.$store.commit('logout')
+            this.$router.push({ path: "/SignIn" });
+        },
+        update() {
+            var formData = new FormData();
+            formData.append("newbook_img", this.file);
+            formData.append("oldisbn", this.oldisbn);
+            formData.append("oldfile", this.oldfile);
+            formData.append("isbn", this.isbn);
+            formData.append("book_name", this.book_name);
+            formData.append("book_desc", this.book_desc);
+            formData.append("published_date", this.published_date);
+            formData.append("publisher_name", this.publisher_name);
+            formData.append("book_stock", this.book_stock);
+            formData.append("alias", this.alias);
+            formData.append("author", this.author);
+            formData.append("type", this.type);
+            axios
+                .put("http://localhost:3000/update", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+
+                })
+                .then((response) => {
+                    this.file  = ""                   
+                    this.isbn = ""
+                    this.book_name = ""
+                    this.book_desc = ""
+                    this.published_date = ""
+                    this.publisher_name = ""
+                    this.book_stock = ""
+                    this.alias = ""
+                    this.author = ""
+                    this.type = ""
+                    this.active = !this.active
+                    this.books = response.data;
+                     // Success! -> redirect to home page
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        }
     }, created() {
 
         axios

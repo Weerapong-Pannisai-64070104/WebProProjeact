@@ -58,7 +58,7 @@ router.put('/NewUser', upload.single('profile_img'), async (req, res, next) => {
   const email = req.body.email
   const phonenum = req.body.numphone
   const customer_id = req.body.customer_id
-  console.log(req.body)
+
   try {
     const file = req.file;
 
@@ -132,19 +132,21 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
       let pubid = await conn.query(
         "SELECT publisher_id FROM Publisher where publisher_name = ?;", [
         publisher_name])
-        
-          pubid = pubid[0][0].published_id
+          console.log(pubid[0][0])
+          pubid = pubid[0][0]
       if (!pubid) { //นี่คือไม่มีpublisherเลยadd
         let newpub = await conn.query(
           "INSERT INTO Publisher(publisher_name) values(?);", [
           publisher_name]
         )
         pubid = newpub[0].insertId
+      }else{
+        pubid = pubid.publisher_id
       }
       
       if (file) {
         let newbook = await conn.query(
-          "INSERT INTO Books VALUES(?,?,?,?,?,?,?);",
+          "REPLACE  INTO Books VALUES(?,?,?,?,?,?,?);",
           [isbn, book_name, file.path.substr(6), book_desc, published_date, pubid, book_stock])
       }
       let newbookauthor = await conn.query(
@@ -162,8 +164,10 @@ router.post("/Addbook", upload.single('book_img'), async function (req, res, nex
     } else {
       res.status(401).json("This Book already in exit!")
     }
-
-
+    let newbook = await conn.query(
+      "SELECT b.* ,c.*,a.* ,t.* FROM Books b  JOIN publisher c USING(publisher_id) join book_author USING(isbn) join Author a using(author_id) join book_type using(isbn) join Type t using(type_id);"
+    )
+    res.send(newbook[0])
     conn.commit()
   } catch (error) {
     await conn.rollback();
@@ -221,5 +225,81 @@ router.get("/product/:id", async function (req, res, next) {
     conn.release();
   }
 });
+router.put("/update", upload.single('newbook_img'), async function (req, res, next) {
+  const conn = await pool.getConnection()
+  await conn.beginTransaction();
+  const isbn = req.body.isbn
+  const book_name = req.body.book_name
+  const book_desc = req.body.book_desc
+  const published_date = req.body.published_date
+  const book_stock = req.body.book_stock
+  const alias = req.body.alias
+  const author = req.body.author
+  const publisher_name = req.body.publisher_name
+  const file = req.file;
+  const type = req.body.type;
+  const oldisbn = req.body.oldisbn;
+  const oldfile = req.body.oldfile;
+  console.log(req.body)
+  try {
+    if(file){
+      const setimg = await conn.query("UPDATE Books set book_img = ? where isbn = ?", [
+        file.path.substr(6),oldisbn
+    ]);
+    }else{
+      const setoldimg = await conn.query("UPDATE Books set book_img = ? where isbn = ?", [
+        oldfile,oldisbn]);
+    }
+    let authorid = await conn.query(
+      "SELECT author_id FROM Author where author_name = ?;", [
+      author]
+    )
+    if (authorid[0].length == 0) { //นี่คือไม่มีAuthorเลยadd
+      let newauthor = await conn.query(
+        "INSERT INTO Author(author_name,author_alias) values(?,?);", [
+        author, alias])
+      authorid = newauthor[0].insertId
+    }else{
+      authorid = authorid[0][0].author_id
+    }
 
+    let pubid = await conn.query(
+      "SELECT publisher_id FROM Publisher where publisher_name = ?;", [
+      publisher_name])
+        console.log(pubid[0][0])
+        pubid = pubid[0][0]
+    if (!pubid) { //นี่คือไม่มีpublisherเลยadd
+      let newpub = await conn.query(
+        "INSERT INTO Publisher(publisher_name) values(?);", [
+        publisher_name]
+      )
+      pubid = newpub[0].insertId
+    }else{
+      pubid = pubid.publisher_id
+    }
+    const setbook = await conn.query("UPDATE Books set isbn = ?,book_name = ?, book_desc = ?, publishered_date = ?,publisher_id = ?,book_stock = ?  where isbn = ?", [
+      isbn,book_name,book_desc,published_date,pubid,book_stock,oldisbn
+  ]);
+  let newtypeid = await conn.query(
+    "SELECT Type_id FROM Type where book_type = ?;", [
+      type])
+  const newtype = await conn.query("UPDATE book_type set Type_id = ? where isbn = ?", [
+    newtypeid[0][0].Type_id,isbn
+]);
+const changeauthor = await conn.query("UPDATE Book_author set author_id = ? where isbn = ?", [
+  authorid,isbn
+]);
+let book = await conn.query(
+  "SELECT b.* ,c.*,a.* ,t.* FROM Books b  JOIN publisher c USING(publisher_id) join book_author USING(isbn) join Author a using(author_id) join book_type using(isbn) join Type t using(type_id);"
+)
+    res.send(book[0])
+    conn.commit()
+  } catch (error) {
+    await conn.rollback();
+    next(error);
+  } finally {
+    console.log('finally')
+    conn.release();
+  }
+});
 exports.router = router;
