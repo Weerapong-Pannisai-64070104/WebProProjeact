@@ -69,6 +69,7 @@ router.post('/SignUp', async function (req, res, next) {
         "INSERT INTO Customer(fname, lname, email, password, address, phone_num, start_membership) VALUES(?, ?, ?, ?,? ,?,NOW());",
         [fname, lname, email, password, address, pnum]
       );
+      conn.commit()
       res.json("success")
       
     } else {

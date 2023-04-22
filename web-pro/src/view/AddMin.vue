@@ -56,14 +56,14 @@
                             <label for="book_img">Book_Image: </label>
                             <input type="file" class="file-input" id="file-input" ref="file" @change="handleFileUpload()">
                         </div><br>
-                        <button v-show="!active"  @click="submit()"
+                        <button v-show="!active" @click="submit()"
                             class="w-full inline-flex items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Add
                             new book</button>
-                        
+
                     </form>
-                    <button v-show="active"  @click="update()"
-                            class="w-full inline-flex items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Update
-                            book</button>
+                    <button v-show="active" @click="update()"
+                        class="w-full inline-flex items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Update
+                        book</button>
                 </div>
             </div>
         </div>
@@ -90,14 +90,14 @@
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 Published Date</th>
-                       
+
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 book_stock</th>
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 publisher_name</th>
-                     
+
                             <th
                                 class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white">
                                 author_name</th>
@@ -146,13 +146,25 @@
                             <td
                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                 {{ book.book_type }}</td>
-                            <td><button  @click="edit(book)"
-                                    class="w-full inline-flex 
-                                items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md font-semibold text-xs capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Edit</button>
-                                <button @click="del(book)"
-                                    class="w-full inline-flex 
-                                items-center justify-center px-4 py-2 bg-black border border-transparent rounded-md text-xs font-semibold capitalize text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Delete</button>
+                            <td><button class="mb-2.5" @click="edit(book)"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="50" height="40" viewBox="0 0 100 100" id="create">
+                                        <path
+                                            d="M86.4 26.9L80 20.6c-.8-.7-2.1-.7-2.8 0L63.8 34H15c-1.1 0-2 .9-2 2v42c0 1.1.9 2 2 2h60c1.1 0 2-.9 2-2V39.2l9.4-9.4c.8-.8.8-2.1 0-2.9zM73.1 76H17V38h42.8L48.7 49.1c-.3.2-.4.6-.5.9l-1.8 6H28.9c-1.1 0-2 .9-2 2s.9 2 2 2h19c.1 0 3.9.1 6.6-.6 1.4-.3 2.4-.6 2.4-.6.4-.1.7-.3.9-.5L73 43.2V76zM55.4 55.1l-4.7 1.2 1.2-4.7 26.7-26.7 3.5 3.5-26.7 26.7z">
+                                        </path>
+                                        <path fill="#00F" d="M1644-650v1684H-140V-650h1784m8-8H-148v1700h1800V-658z"></path>
+                                    </svg></button>
                             </td>
+                            <td>
+                                <button @click="del(book)" class=""> <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" id="remove">
+                                        <path fill="#000100"
+                                            d="m12.695 10 6.752-6.752a1.887 1.887 0 0 0 0-2.668L19.42.553a1.887 1.887 0 0 0-2.668 0L10 7.305 3.248.553a1.887 1.887 0 0 0-2.668 0L.553.58a1.887 1.887 0 0 0 0 2.668L7.305 10 .553 16.752a1.887 1.887 0 0 0 0 2.668l.027.027a1.887 1.887 0 0 0 2.668 0L10 12.695l6.752 6.752a1.887 1.887 0 0 0 2.668 0l.027-.027a1.887 1.887 0 0 0 0-2.668L12.695 10z">
+
+
+                                        </path>
+                                    </svg></button>
+                            </td>
+
                         </tr>
 
                     </tbody>
@@ -190,8 +202,8 @@ export default {
             type: "None",
             books: null,
             active: false,
-            oldisbn:null,
-            oldfile:null
+            oldisbn: null,
+            oldfile: null
         };
     },
     methods: {
@@ -233,7 +245,7 @@ export default {
             console.log(this.file)
         },
         submit() {
-            
+
             var formData = new FormData();
             formData.append("book_img", this.file);
             formData.append("isbn", this.isbn);
@@ -253,7 +265,7 @@ export default {
 
                 })
                 .then((response) => {
-                    this.file  = ""                   
+                    this.file = ""
                     this.isbn = ""
                     this.book_name = ""
                     this.book_desc = ""
@@ -264,7 +276,7 @@ export default {
                     this.author = ""
                     this.type = ""
                     this.books = response.data;
-                     // Success! -> redirect to home page
+                    // Success! -> redirect to home page
                     console.log(response)
                 })
                 .catch((error) => {
@@ -298,7 +310,7 @@ export default {
 
                 })
                 .then((response) => {
-                    this.file  = ""                   
+                    this.file = ""
                     this.isbn = ""
                     this.book_name = ""
                     this.book_desc = ""
@@ -310,7 +322,7 @@ export default {
                     this.type = ""
                     this.active = !this.active
                     this.books = response.data;
-                     // Success! -> redirect to home page
+                    // Success! -> redirect to home page
                     console.log(response)
                 })
                 .catch((error) => {

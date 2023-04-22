@@ -278,7 +278,7 @@ router.put("/update", upload.single('newbook_img'), async function (req, res, ne
       pubid = pubid.publisher_id
     }
     const setbook = await conn.query("UPDATE Books set isbn = ?,book_name = ?, book_desc = ?, publishered_date = ?,publisher_id = ?,book_stock = ?  where isbn = ?", [
-      isbn,book_name,book_desc,published_date,pubid,book_stock,oldisbn
+      isbn,book_name,book_desc,published_date+1,pubid,book_stock,oldisbn
   ]);
   let newtypeid = await conn.query(
     "SELECT Type_id FROM Type where book_type = ?;", [
