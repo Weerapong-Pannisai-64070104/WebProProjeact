@@ -184,8 +184,14 @@ router.get("/book", async function (req, res, next) {
     let book = await pool.query(
       "SELECT b.* ,c.*,a.* ,t.* FROM Books b  JOIN publisher c USING(publisher_id) join book_author USING(isbn) join Author a using(author_id) join book_type using(isbn) join Type t using(type_id);"
     )
-      res.send(book[0])
-      console.log(book)
+    let user = await pool.query(
+      "SELECT c.customer_id, c.fname, c.lname, c.email, c.start_membership, bo.order_id,bo.date_of_borrow ,bo.end_of_date ,bol.order_line_id,bol.isbn,bol.status FROM Customer c join book_order bo using (customer_id) left join book_order_line bol using(order_id);"
+    )
+    let cus = await pool.query(
+      "SELECT c.customer_id, c.fname, c.lname, c.email, c.start_membership FROM Customer c;"
+    )
+      res.send({book:book[0],customerH:user[0],customer:cus[0]})
+      console.log(user[0])
   } catch (error) {
     next(error)
   }
@@ -300,6 +306,23 @@ let book = await conn.query(
   } finally {
     console.log('finally')
     conn.release();
+  }
+});
+
+router.get("/order", async function (req, res, next) {
+cus_id = req.query.customer_id
+ try{
+  const orderid = await pool.query("SELECT * FROM book_order WHERE customer_id=?", [
+    cus_id,
+  ]);
+
+
+ res.json({orderid:orderid[0]}) 
+  
+ }catch (err) {
+    next(err);
+  } finally {
+    console.log('finally')
   }
 });
 exports.router = router;

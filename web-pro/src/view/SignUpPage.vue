@@ -30,6 +30,7 @@
                         Account</button>
 
                 </form>
+                
 
 
             </div>
@@ -56,7 +57,9 @@ export default {
             password: "",
             conpassword: "",
             pnum: "",
-            address: ""
+            address: "",
+            showModal: false,
+
         }
     }, methods: {validateForm() {
             let errors = [];
