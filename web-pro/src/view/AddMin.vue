@@ -294,7 +294,7 @@
                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
                                     {{ item.end_of_date.slice(0, 19) }}</td>
                                 <td>
-                                    <button><svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 15 13" id="detail">
+                                    <button @click="getline(item)"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 15 13" id="detail">
                                             <path d="M0 0v13h15V0H0zm14 12H1V1h13v11z">
 
                                             </path>
@@ -306,6 +306,43 @@
                         </tbody>
                     </table>
                 </div>
+                <div class=" tbl-fixed">
+
+<table v-if="order_line" class="table-auto border-spacing-px min-w-max ">
+    <thead>
+        <tr class="sticky top-0">
+            <th
+                class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white ">
+                Order</th>
+                <th
+                class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white ">
+                Book isbn</th>
+                <th
+                class=" px-1 bg-black text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center text-white ">
+                status</th>
+
+        </tr>
+       
+    </thead>
+
+    <tbody>
+        <tr v-for="item in orderdetail" :key="item.order_line_id">
+            <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+                {{ item.order_line_id }}</td>
+                <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+                {{ item.isbn}}</td>
+                <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+                {{ item.status}}</td>
+           
+            
+        </tr>
+
+    </tbody>
+</table>
+</div>
             </div>
 
         </div>
@@ -348,10 +385,26 @@ export default {
             showModal: false,
             customer: null,
             order: false,
-            order_id: null
+            order_id: null,
+            order_line:false
         };
     },
     methods: {
+        getline(item){
+            axios
+                .get("http://localhost:3000/orderline", { params: { order_id: item.order_id } }, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then((response) => {
+                    this.orderdetail = response.data.orderline
+                    this.order_line = true
+                })
+                .catch((error) => {
+                    alert(error.response.data)
+                });
+        },
         cusorder(cus) {
             axios
                 .get("http://localhost:3000/order", { params: { customer_id: cus.customer_id } }, {

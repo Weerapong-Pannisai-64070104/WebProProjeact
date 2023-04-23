@@ -10,7 +10,7 @@
             <tbody>
                 <tr v-for="item in cart" :key="item.isbn">
                     <td class="px-4 py-2">
-                        <img class="object-contain h-48 w-96" :src=item.img alt="Placeholder image">
+                        <img class="w-37 h-40" :src="`http://localhost:3000/${item.book_img}`" alt="">
                     </td>
                     <td class="px-4 py-2">{{ item.book_name }}</td>
                 </tr>

@@ -325,4 +325,20 @@ cus_id = req.query.customer_id
     console.log('finally')
   }
 });
+router.get("/orderline", async function (req, res, next) {
+  orderid = req.query.order_id
+   try{
+    const orderline = await pool.query("SELECT * FROM book_order_line WHERE order_id = ?", [
+      orderid,
+    ]);
+  
+  
+   res.json({orderline:orderline[0]}) 
+    
+   }catch (err) {
+      next(err);
+    } finally {
+      console.log('finally')
+    }
+  });
 exports.router = router;
