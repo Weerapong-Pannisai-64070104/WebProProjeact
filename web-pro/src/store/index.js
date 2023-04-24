@@ -11,6 +11,7 @@ const storagePlugin = store => {
   }
 export default  createStore({
     state:{
+        id:"",
         email:"",
         prevId: '' 
     },
@@ -21,15 +22,23 @@ export default  createStore({
         login(state,email){
             state.email = email;
             localStorage.setItem('email',email);
-            
+   
+        },login2(state,id){
+            state.id = id
+            localStorage.setItem('id',id);
         },logout(state){
             state.email="";
+            state.id ="";
             localStorage.removeItem("email");
             localStorage.removeItem('cart')
+            localStorage.removeItem('id')
         },
         initializeStore(state){
             if(localStorage.getItem('email')){
                 state.email = localStorage.getItem('email');
+            }
+            if(localStorage.getItem('id')){
+                state.id = localStorage.getItem('id');
             }
         }
     },

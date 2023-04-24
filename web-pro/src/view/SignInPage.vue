@@ -35,10 +35,10 @@ export default {
     return {
       e: "",
       pass: "",
+      id:""
     }
   }, methods: {
     submit() {
-      this.$store.commit('login', this.e)
       var formData = new FormData();
       formData.append("email", this.e);
       formData.append("password", this.pass);
@@ -56,7 +56,11 @@ export default {
               icon: 'success'
           }).then((next)=>{
             if(next){
+              this.id = response.data.result[0].admin_id
+              this.$store.commit('login', this.e)
+              this.$store.commit('login2',this.id)
               this.$router.push({ path: "/Addmin" });
+              
             }
           })
           } else {
@@ -66,7 +70,12 @@ export default {
               icon:'success'
           }).then((next)=>{
             if(next){
+              
+              this.id = response.data.result[0].customer_id
+              this.$store.commit('login', this.e)
+              this.$store.commit('login2',this.id)
               this.$router.push({ path: "/" });
+             
             }
           })
           }

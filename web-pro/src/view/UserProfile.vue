@@ -10,7 +10,7 @@
                         <div class="bg-white p-3 border-t-4 border-gray-700  ">
                             <div class="image overflow-hidden ">
 
-                                <input class="file-input hidden" type="file" id="file-input" ref="file"
+                                <input v-if="editform" class="file-input hidden" type="file" id="file-input" ref="file"
                                     @change="handleFileUpload()" />
                                 <label for="file-input">
                                     <img class="h-50 w-50 mx-auto rounded-full" 
