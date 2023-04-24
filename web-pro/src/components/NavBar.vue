@@ -201,8 +201,15 @@ export default {
       this.active = !this.active;
     },
     goCheckout() {
-      localStorage.setItem("cart", JSON.stringify(this.cart));
-      window.location.href = "/CheckOut";
+      console.log(this.cart)
+      axios
+      .post("http://localhost:3000/checkout", { params: { book: this.cart, user: this.$store.state.id } })
+      .then((response) => {
+        
+      })
+      .catch((error) => {
+        alert(error.response.data)
+      });
     },
     logout() {
       this.$store.commit('logout')
